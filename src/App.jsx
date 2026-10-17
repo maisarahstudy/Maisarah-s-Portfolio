@@ -40,8 +40,12 @@ export default function App() {
     setGameState('start-screen');
   };
 
+// ✦ AUTO-START BGM WITH A 1-SECOND DELAY WHEN TITLE SCREEN APPEARS ✦
   const handleLoadingComplete = () => {
     setGameState('start-screen');
+    setTimeout(() => {
+      startAmbientSong();
+    }, 1000); // 1000ms = 1 second delay
   };
 
   const handleSelectMenuOption = (sectionId) => {
