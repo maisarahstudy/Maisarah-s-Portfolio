@@ -1,0 +1,14 @@
+@import "tailwindcss";
+
+body {
+  background-color: #080608;
+  font-family: system-ui, -apple-system, sans-serif;
+  overflow-x: hidden;
+}
+
+/* Hide default operating system hand cursor on desktop so only our arcane cursor shows */
+@media (pointer: fine) {
+  *, body, button, a, div, span, [role="button"] {
+    cursor: none !important;
+  }
+}
