@@ -6,12 +6,10 @@ export default function CustomCursor({ isDark }) {
   const [isClicking, setIsClicking] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
 
-  // Locked directly to mouse coordinates (no lag, zero separation!)
   const mouseX = useMotionValue(-100);
   const mouseY = useMotionValue(-100);
 
   useEffect(() => {
-    // Disable on touch screens (phones/tablets)
     if (window.matchMedia('(pointer: coarse)').matches) return;
 
     const handleMouseMove = (e) => {
@@ -47,13 +45,9 @@ export default function CustomCursor({ isDark }) {
 
   return (
     <motion.div
-      style={{
-        x: mouseX,
-        y: mouseY,
-      }}
+      style={{ x: mouseX, y: mouseY }}
       className="pointer-events-none fixed top-0 left-0 z-[100] flex items-center justify-center -translate-x-1/2 -translate-y-1/2"
     >
-      {/* 1. Slowly Revolving Arcane Astrolabe Ring */}
       <motion.div
         animate={{
           rotate: 360,
@@ -73,32 +67,18 @@ export default function CustomCursor({ isDark }) {
             : 'border-rose-700/40'
         }`}
       >
-        {/* 4 Cardinal Astrolabe Diamond Points */}
         <div className={`absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1 h-1 rounded-full ${isDark ? 'bg-rose-300' : 'bg-rose-700'}`} />
         <div className={`absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-1 h-1 rounded-full ${isDark ? 'bg-rose-300' : 'bg-rose-700'}`} />
         <div className={`absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 w-1 h-1 rounded-full ${isDark ? 'bg-rose-300' : 'bg-rose-700'}`} />
         <div className={`absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 w-1 h-1 rounded-full ${isDark ? 'bg-rose-300' : 'bg-rose-700'}`} />
-
-        {/* Inner Dashed Arcane Circle */}
-        <div
-          className={`w-6 h-6 rounded-full border border-dashed transition-colors duration-300 ${
-            isDark ? 'border-rose-400/30' : 'border-rose-700/30'
-          }`}
-        />
+        <div className={`w-6 h-6 rounded-full border border-dashed transition-colors duration-300 ${isDark ? 'border-rose-400/30' : 'border-rose-700/30'}`} />
       </motion.div>
 
-      {/* 2. Precision Diamond Star Core (Locked right in the center) */}
-      <span
-        className={`absolute text-xs select-none transition-all duration-200 ${
-          isDark
-            ? isHovered
-              ? 'text-white scale-125 drop-shadow-[0_0_8px_rgba(244,63,94,0.9)]'
-              : 'text-rose-300 drop-shadow-[0_0_4px_rgba(244,63,94,0.5)]'
-            : isHovered
-            ? 'text-rose-950 scale-125 drop-shadow-[0_0_6px_rgba(225,29,72,0.6)]'
-            : 'text-rose-800'
-        }`}
-      >
+      <span className={`absolute text-xs select-none transition-all duration-200 ${
+        isDark
+          ? isHovered ? 'text-white scale-125 drop-shadow-[0_0_8px_rgba(244,63,94,0.9)]' : 'text-rose-300 drop-shadow-[0_0_4px_rgba(244,63,94,0.5)]'
+          : isHovered ? 'text-rose-950 scale-125 drop-shadow-[0_0_6px_rgba(225,29,72,0.6)]' : 'text-rose-800'
+      }`}>
         ✦
       </span>
     </motion.div>

@@ -3,9 +3,7 @@ import { motion } from 'framer-motion';
 
 export default function MagicSigil({ isDark }) {
   return (
-    // pointer-events-none ensures zero click interruption, opacity lowered to 25% so text pops clean
     <div className="fixed inset-0 pointer-events-none overflow-hidden z-0 flex items-center justify-center opacity-25">
-      {/* Outer Rotating Magic Circle */}
       <motion.div
         animate={{ rotate: 360 }}
         transition={{ duration: 80, repeat: Infinity, ease: 'linear' }}
@@ -13,14 +11,11 @@ export default function MagicSigil({ isDark }) {
           isDark ? 'border-rose-500/20' : 'border-rose-900/[0.08]'
         }`}
       >
-        <div
-          className={`w-[620px] h-[620px] rounded-full border border-dashed transition-colors duration-700 ${
-            isDark ? 'border-rose-400/25' : 'border-rose-900/[0.1]'
-          }`}
-        />
+        <div className={`w-[620px] h-[620px] rounded-full border border-dashed transition-colors duration-700 ${
+          isDark ? 'border-rose-400/25' : 'border-rose-900/[0.1]'
+        }`} />
       </motion.div>
 
-      {/* Counter-rotating Inner Arcane Ring */}
       <motion.div
         animate={{ rotate: -360 }}
         transition={{ duration: 60, repeat: Infinity, ease: 'linear' }}
@@ -36,12 +31,9 @@ export default function MagicSigil({ isDark }) {
         }`} />
       </motion.div>
 
-      {/* Ambient Core Light */}
-      <div
-        className={`absolute w-[600px] h-[600px] rounded-full blur-[190px] transition-colors duration-700 ${
-          isDark ? 'bg-rose-950/20' : 'bg-rose-200/30'
-        }`}
-      />
+      <div className={`absolute w-[600px] h-[600px] rounded-full blur-[190px] transition-colors duration-700 ${
+        isDark ? 'bg-rose-950/20' : 'bg-rose-200/30'
+      }`} />
     </div>
   );
 }

@@ -51,28 +51,21 @@ export default function RPGLoader({ onComplete, isDark }) {
         <div className="pointer-events-none fixed inset-0 shadow-[inset_0_0_140px_rgba(0,0,0,0.85)] z-0" />
       )}
 
-      <div
-        className={`pointer-events-none fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full blur-[180px] transition-colors duration-700 ${
-          isDark ? 'bg-rose-950/25' : 'bg-rose-200/40'
-        }`}
-      />
+      <div className={`pointer-events-none fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full blur-[180px] transition-colors duration-700 ${
+        isDark ? 'bg-rose-950/25' : 'bg-rose-200/40'
+      }`} />
 
-      {/* Top Header */}
-      <div
-        className={`relative z-10 flex items-center justify-between font-mono text-xs tracking-[0.25em] uppercase ${
-          isDark ? 'text-rose-400/70' : 'text-stone-600'
-        }`}
-      >
+      <div className={`relative z-10 flex items-center justify-between font-mono text-xs tracking-[0.25em] uppercase ${
+        isDark ? 'text-rose-400/70' : 'text-stone-600'
+      }`}>
         <div className="flex items-center gap-2.5">
           <Sparkle className={`w-3.5 h-3.5 ${isDark ? 'text-rose-500 animate-pulse' : 'text-rose-700'}`} />
-          <span>CHRONICLES OF MAISARAH// INITIALIZING</span>
+          <span>CHRONICLES // INITIALIZING</span>
         </div>
         <span>KOTA KINABALU // 2026</span>
       </div>
 
-      {/* Center: Talisman & Synchronized Loading Line */}
       <div className="relative z-10 max-w-xl mx-auto w-full my-auto flex flex-col items-center text-center">
-        
         <motion.div
           animate={{ rotate: 360 }}
           transition={{ duration: 25, repeat: Infinity, ease: 'linear' }}
@@ -96,14 +89,9 @@ export default function RPGLoader({ onComplete, isDark }) {
           {fantasyLore[loreIndex]}
         </p>
 
-        {/* ✦ 100% SYNCHRONIZED LOADING BAR: The star is physically locked inside the bar's tip! ✦ */}
         <div className="w-full max-w-md mt-8 relative">
-          {/* Base Track Line */}
-          <div className={`w-full h-[2px] ${
-            isDark ? 'bg-rose-950/80' : 'bg-stone-300'
-          }`} />
+          <div className={`w-full h-[2px] ${isDark ? 'bg-rose-950/80' : 'bg-stone-300'}`} />
 
-          {/* Advancing Filament */}
           <div
             className={`absolute top-0 left-0 h-[2px] ${
               isDark
@@ -112,32 +100,24 @@ export default function RPGLoader({ onComplete, isDark }) {
             }`}
             style={{ width: `${progress}%` }}
           >
-            {/* The star is anchored directly to the right edge of the bar (100% same speed!) */}
-            <span
-              className={`absolute right-[-5px] -top-[7px] text-xs leading-none select-none ${
-                isDark ? 'text-rose-300 drop-shadow-[0_0_8px_rgba(244,63,94,0.9)]' : 'text-rose-800'
-              }`}
-            >
+            <span className={`absolute right-[-5px] -top-[7px] text-xs leading-none select-none ${
+              isDark ? 'text-rose-300 drop-shadow-[0_0_8px_rgba(244,63,94,0.9)]' : 'text-rose-800'
+            }`}>
               ✦
             </span>
           </div>
         </div>
 
-        {/* Numerical Counter */}
         <div className={`mt-5 font-mono text-xs tracking-[0.3em] font-semibold ${
           isDark ? 'text-rose-400/80' : 'text-stone-600'
         }`}>
           [ {progress}% ]
         </div>
-
       </div>
 
-      {/* Footer */}
-      <div
-        className={`relative z-10 flex items-center justify-between font-mono text-xs border-t pt-4 tracking-wider uppercase transition-colors ${
-          isDark ? 'border-rose-950/60 text-rose-400/50' : 'border-stone-300 text-stone-500'
-        }`}
-      >
+      <div className={`relative z-10 flex items-center justify-between font-mono text-xs border-t pt-4 tracking-wider uppercase transition-colors ${
+        isDark ? 'border-rose-950/60 text-rose-400/50' : 'border-stone-300 text-stone-500'
+      }`}>
         <span>SYS.STATUS // RITUAL IN PROGRESS</span>
         <span>ARCHIVES OF MAISARAH</span>
       </div>

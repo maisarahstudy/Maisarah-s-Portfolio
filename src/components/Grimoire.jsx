@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Sparkles, X, Lock, Bookmark } from 'lucide-react';
 import { playHoverSound, playPageFlipSound, playBookOpenSound, playBookCloseSound } from '../utils/sound';
 
-// ✦ 5 UNIQUE SECTION-SPECIFIC ALCHEMICAL SIGILS ✦
 const SigilLanguages = ({ isDark }) => (
   <svg viewBox="0 0 120 120" className="w-28 h-28 mx-auto" fill="none">
     <circle cx="60" cy="60" r="54" stroke={isDark ? '#f43f5e' : '#b88e60'} strokeWidth="1" strokeDasharray="3 3" opacity="0.6" />
@@ -75,12 +74,8 @@ export default function Grimoire({ isDark }) {
 
   const folios = [
     {
-      pageLeft: '1',
-      pageRight: '2',
-      chapter: 'FOLIO I',
-      latinTitle: 'De Dialectis Primis',
-      category: 'PRIMARY SCRIPT LANGUAGES',
-      subtitle: 'Core Syntax & Logic Invocations',
+      pageLeft: '1', pageRight: '2', chapter: 'FOLIO I', latinTitle: 'De Dialectis Primis',
+      category: 'PRIMARY SCRIPT LANGUAGES', subtitle: 'Core Syntax & Logic Invocations',
       folioLore: 'The foundational dialects used to summon backend structures, algorithmic logic, and asynchronous data streams.',
       scholarsNote: 'Each language forms a distinct linguistic conduit. Mastered through production implementations and formal computer science foundations.',
       Sigil: SigilLanguages,
@@ -93,12 +88,8 @@ export default function Grimoire({ isDark }) {
       ],
     },
     {
-      pageLeft: '3',
-      pageRight: '4',
-      chapter: 'FOLIO II',
-      latinTitle: 'De Machinis Telariis',
-      category: 'WEB ENGINES & FRAMEWORKS',
-      subtitle: 'Front-to-Back Orchestration',
+      pageLeft: '3', pageRight: '4', chapter: 'FOLIO II', latinTitle: 'De Machinis Telariis',
+      category: 'WEB ENGINES & FRAMEWORKS', subtitle: 'Front-to-Back Orchestration',
       folioLore: 'High-throughput frameworks forging responsive interfaces, deterministic state pipelines, and fortified middleware defenses.',
       scholarsNote: 'Architecture optimized for latency reduction, zero-runtime overhead where possible, and seamless modular scalability.',
       Sigil: SigilWeb,
@@ -111,12 +102,8 @@ export default function Grimoire({ isDark }) {
       ],
     },
     {
-      pageLeft: '5',
-      pageRight: '6',
-      chapter: 'FOLIO III',
-      latinTitle: 'De Thesauris Datorum',
-      category: 'DATA VAULTS & MOBILE SEALS',
-      subtitle: 'Persistence & Cross-Platform Engines',
+      pageLeft: '5', pageRight: '6', chapter: 'FOLIO III', latinTitle: 'De Thesauris Datorum',
+      category: 'DATA VAULTS & MOBILE SEALS', subtitle: 'Persistence & Cross-Platform Engines',
       folioLore: 'Transactional data repositories and client-side runtimes preserving state across distributed networks.',
       scholarsNote: 'Schema normalization balanced with indexing strategies to ensure ACID compliance and resilient querying under high loads.',
       Sigil: SigilVaults,
@@ -128,12 +115,8 @@ export default function Grimoire({ isDark }) {
       ],
     },
     {
-      pageLeft: '7',
-      pageRight: '8',
-      chapter: 'FOLIO IV',
-      latinTitle: 'De Alchimia Visualis',
-      category: 'VISUAL ALCHEMY & LINEAGE',
-      subtitle: 'Design Craftsmanship & Git Lineage',
+      pageLeft: '7', pageRight: '8', chapter: 'FOLIO IV', latinTitle: 'De Alchimia Visualis',
+      category: 'VISUAL ALCHEMY & LINEAGE', subtitle: 'Design Craftsmanship & Git Lineage',
       folioLore: 'The visual translation of ideas into precise spatial tokens, together with deterministic version control lineage.',
       scholarsNote: 'Visual tokens designed with accessibility contrast ratios and human-centric micro-interactions in mind.',
       Sigil: SigilAlchemy,
@@ -145,12 +128,8 @@ export default function Grimoire({ isDark }) {
       ],
     },
     {
-      pageLeft: '9',
-      pageRight: '10',
-      chapter: 'FOLIO V',
-      latinTitle: 'De Linguis et Virtutibus',
-      category: 'HUMAN TONGUES & VIRTUES',
-      subtitle: 'Spoken Lexicons & Collaborative Instincts',
+      pageLeft: '9', pageRight: '10', chapter: 'FOLIO V', latinTitle: 'De Linguis et Virtutibus',
+      category: 'HUMAN TONGUES & VIRTUES', subtitle: 'Spoken Lexicons & Collaborative Instincts',
       folioLore: 'The bridges of human collaboration, cross-border cultural understanding, and disciplined analytical problem solving.',
       scholarsNote: 'Language is the primary protocol. Verified through formal JLPT accreditation and academic Dean’s List records.',
       Sigil: SigilTongues,
@@ -192,8 +171,6 @@ export default function Grimoire({ isDark }) {
 
   return (
     <div className="w-full pt-8 pb-16 font-serif">
-      
-      {/* ✦ GRAND GRIMOIRE TITLE BANNER ✦ */}
       <div className="flex flex-col items-center text-center mb-14 pb-8 border-b border-rose-500/20">
         <div className="flex items-center gap-3 text-xs font-mono tracking-[0.3em] uppercase text-rose-500 mb-2.5 font-bold">
           <Sparkles className="w-3.5 h-3.5" />
@@ -218,7 +195,6 @@ export default function Grimoire({ isDark }) {
         </div>
       </div>
 
-      {/* 1. CLOSED BOOK TOME */}
       {!isOpen && (
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
@@ -228,9 +204,7 @@ export default function Grimoire({ isDark }) {
         >
           <div className="relative group cursor-none">
             <div className={`absolute top-3 right-[-14px] w-full h-[98%] rounded-r-2xl border-r-4 border-b-4 ${
-              isDark
-                ? 'bg-[#26191b] border-[#c49a6c]/60 shadow-[0_0_30px_rgba(0,0,0,0.9)]'
-                : 'bg-[#faf4ec] border-[#b88e60]/70 shadow-lg'
+              isDark ? 'bg-[#26191b] border-[#c49a6c]/60 shadow-[0_0_30px_rgba(0,0,0,0.9)]' : 'bg-[#faf4ec] border-[#b88e60]/70 shadow-lg'
             }`} />
             <div className={`absolute top-6 right-[-8px] w-full h-[96%] rounded-r-xl border-r-2 ${
               isDark ? 'bg-[#1a1113] border-[#8a6843]/50' : 'bg-[#f4ebe0] border-[#b88e60]/40'
@@ -242,38 +216,26 @@ export default function Grimoire({ isDark }) {
               whileHover={{ scale: 1.02, y: -4 }}
               whileTap={{ scale: 0.98 }}
               className={`cursor-none relative w-[340px] sm:w-[420px] md:w-[440px] h-[580px] rounded-r-2xl rounded-l-md border-2 text-left transition-all duration-300 shadow-2xl overflow-hidden ${
-                isDark
-                  ? 'border-[#c49a6c]/80 bg-gradient-to-br from-[#1c0f16] via-[#12080f] to-[#080306] shadow-[0_0_55px_rgba(244,63,94,0.25)]'
-                  : 'border-[#b88e60] bg-gradient-to-br from-[#ffffff] via-[#fcfbf9] to-[#f7f3ec] shadow-[0_15px_45px_rgba(184,142,96,0.25)]'
+                isDark ? 'border-[#c49a6c]/80 bg-gradient-to-br from-[#1c0f16] via-[#12080f] to-[#080306] shadow-[0_0_55px_rgba(244,63,94,0.25)]' : 'border-[#b88e60] bg-gradient-to-br from-[#ffffff] via-[#fcfbf9] to-[#f7f3ec] shadow-[0_15px_45px_rgba(184,142,96,0.25)]'
               }`}
             >
               <div className={`absolute top-0 bottom-0 left-0 w-10 border-r-2 flex flex-col justify-around py-10 items-center z-20 ${
-                isDark
-                  ? 'bg-gradient-to-r from-black via-[#1a0c14] to-[#12080f] border-[#c49a6c]/60'
-                  : 'bg-gradient-to-r from-[#ebe2d8] via-[#f4eee6] to-[#ebe2d8] border-[#b88e60]'
+                isDark ? 'bg-gradient-to-r from-black via-[#1a0c14] to-[#12080f] border-[#c49a6c]/60' : 'bg-gradient-to-r from-[#ebe2d8] via-[#f4eee6] to-[#ebe2d8] border-[#b88e60]'
               }`}>
                 {[1, 2, 3, 4, 5].map((i) => (
-                  <div key={i} className={`w-6 h-2.5 rounded-full border shadow-inner ${
-                    isDark ? 'border-rose-400/40 bg-black/50' : 'border-[#b88e60] bg-stone-200'
-                  }`} />
+                  <div key={i} className={`w-6 h-2.5 rounded-full border shadow-inner ${isDark ? 'border-rose-400/40 bg-black/50' : 'border-[#b88e60] bg-stone-200'}`} />
                 ))}
               </div>
 
               <div className={`absolute top-1/2 -right-1 -translate-y-1/2 w-9 h-20 rounded-l-md border-2 flex items-center justify-center shadow-xl z-20 ${
-                isDark
-                  ? 'border-[#c49a6c] bg-[#24131d] text-[#e0b584]'
-                  : 'border-[#b88e60] bg-[#fbf5ee] text-[#8a5d30]'
+                isDark ? 'border-[#c49a6c] bg-[#24131d] text-[#e0b584]' : 'border-[#b88e60] bg-[#fbf5ee] text-[#8a5d30]'
               }`}>
                 <Lock className="w-4 h-4 drop-shadow-sm" />
               </div>
 
               <div className="ml-10 h-full flex flex-col justify-between items-center text-center py-7 px-5 relative z-10">
-                <div className={`absolute inset-3 border rounded-xl pointer-events-none ${
-                  isDark ? 'border-[#c49a6c]/35' : 'border-[#b88e60]/35'
-                }`} />
-                <div className={`absolute inset-5 border border-dashed rounded-lg pointer-events-none ${
-                  isDark ? 'border-[#c49a6c]/20' : 'border-[#b88e60]/20'
-                }`} />
+                <div className={`absolute inset-3 border rounded-xl pointer-events-none ${isDark ? 'border-[#c49a6c]/35' : 'border-[#b88e60]/35'}`} />
+                <div className={`absolute inset-5 border border-dashed rounded-lg pointer-events-none ${isDark ? 'border-[#c49a6c]/20' : 'border-[#b88e60]/20'}`} />
 
                 <span className={`absolute top-4 left-4 text-xs ${isDark ? 'text-[#c49a6c]' : 'text-[#b88e60]'}`}>✦</span>
                 <span className={`absolute top-4 right-4 text-xs ${isDark ? 'text-[#c49a6c]' : 'text-[#b88e60]'}`}>✦</span>
@@ -281,12 +243,8 @@ export default function Grimoire({ isDark }) {
                 <span className={`absolute bottom-4 right-4 text-xs ${isDark ? 'text-[#c49a6c]' : 'text-[#b88e60]'}`}>✦</span>
 
                 <div className="pt-2">
-                  <span className="text-[10px] font-mono tracking-[0.35em] uppercase text-rose-500 font-bold block">
-                    ✦ SACRED CODEX ✦
-                  </span>
-                  <span className="text-[11px] font-mono tracking-[0.22em] uppercase opacity-60 block mt-1">
-                    NETCENTRIC ARTIFACT
-                  </span>
+                  <span className="text-[10px] font-mono tracking-[0.35em] uppercase text-rose-500 font-bold block">✦ SACRED CODEX ✦</span>
+                  <span className="text-[11px] font-mono tracking-[0.22em] uppercase opacity-60 block mt-1">NETCENTRIC ARTIFACT</span>
                 </div>
 
                 <div className="flex flex-col items-center my-auto">
@@ -304,21 +262,15 @@ export default function Grimoire({ isDark }) {
                     <span className="text-2xl text-rose-500 absolute drop-shadow-[0_0_15px_rgba(244,63,94,0.9)]">✦</span>
                   </motion.div>
 
-                  <h3 className={`text-2xl sm:text-3xl tracking-[0.25em] font-normal uppercase leading-tight ${
-                    isDark ? 'text-white' : 'text-stone-900 font-bold'
-                  }`}>
+                  <h3 className={`text-2xl sm:text-3xl tracking-[0.25em] font-normal uppercase leading-tight ${isDark ? 'text-white' : 'text-stone-900 font-bold'}`}>
                     THE ARCANE GRIMOIRE
                   </h3>
-                  <p className="text-xs font-mono tracking-[0.28em] mt-2 text-rose-500 font-semibold uppercase">
-                    5 FOLIOS // SEALED
-                  </p>
+                  <p className="text-xs font-mono tracking-[0.28em] mt-2 text-rose-500 font-semibold uppercase">5 FOLIOS // SEALED</p>
                 </div>
 
                 <div className="pb-2">
                   <span className={`inline-flex items-center gap-2.5 text-xs font-mono tracking-[0.22em] uppercase px-6 py-3 rounded-full border transition-all ${
-                    isDark
-                      ? 'border-[#c49a6c] bg-[#24131d]/90 text-rose-200 group-hover:border-rose-300 group-hover:text-white shadow-[0_0_20px_rgba(244,63,94,0.35)]'
-                      : 'border-[#b88e60] bg-white text-stone-900 font-bold group-hover:bg-rose-50 shadow-md'
+                    isDark ? 'border-[#c49a6c] bg-[#24131d]/90 text-rose-200 group-hover:border-rose-300 group-hover:text-white shadow-[0_0_20px_rgba(244,63,94,0.35)]' : 'border-[#b88e60] bg-white text-stone-900 font-bold group-hover:bg-rose-50 shadow-md'
                   }`}>
                     <span>✦ UNSEAL GRIMOIRE ✦</span>
                   </span>
@@ -326,15 +278,12 @@ export default function Grimoire({ isDark }) {
               </div>
             </motion.button>
           </div>
-          <p className={`text-xs font-mono tracking-[0.2em] uppercase mt-6 ${
-            isDark ? 'text-rose-300/60' : 'text-stone-600'
-          }`}>
+          <p className={`text-xs font-mono tracking-[0.2em] uppercase mt-6 ${isDark ? 'text-rose-300/60' : 'text-stone-600'}`}>
             Click the ancient tome to unseal the folios
           </p>
         </motion.div>
       )}
 
-      {/* 2. OPEN GRIMOIRE: AUTHENTIC ILLUMINATED MANUSCRIPT */}
       {isOpen && (
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
@@ -342,12 +291,9 @@ export default function Grimoire({ isDark }) {
           exit={{ opacity: 0, scale: 0.9 }}
           transition={{ duration: 0.6, ease: 'easeOut' }}
           className={`cursor-none relative w-full max-w-5xl mx-auto rounded-2xl border-2 shadow-2xl backdrop-blur-md overflow-hidden ${
-            isDark
-              ? 'border-[#c49a6c]/70 bg-gradient-to-b from-[#140a12] via-[#0e060c] to-[#070306] text-rose-50 shadow-[0_0_70px_rgba(244,63,94,0.22)]'
-              : 'border-[#b88e60] bg-[#faf6f0] text-stone-950 shadow-2xl'
+            isDark ? 'border-[#c49a6c]/70 bg-gradient-to-b from-[#140a12] via-[#0e060c] to-[#070306] text-rose-50 shadow-[0_0_70px_rgba(244,63,94,0.22)]' : 'border-[#b88e60] bg-[#faf6f0] text-stone-950 shadow-2xl'
           }`}
         >
-          {/* Header Bar */}
           <div className="flex items-center justify-between border-b px-6 sm:px-10 py-3.5 border-rose-500/20 font-mono text-xs tracking-widest uppercase">
             <div className="flex items-center gap-2 text-rose-500 font-bold">
               <Bookmark className="w-4 h-4 fill-current" />
@@ -358,9 +304,7 @@ export default function Grimoire({ isDark }) {
               onClick={handleCloseBook}
               onMouseEnter={playHoverSound}
               className={`cursor-none group flex items-center gap-2 px-3 py-1 rounded-lg border transition-all ${
-                isDark
-                  ? 'border-rose-900/60 bg-rose-950/40 text-rose-300 hover:border-rose-400 hover:text-white'
-                  : 'border-stone-300 bg-white text-stone-800 hover:border-rose-600 hover:text-black shadow-xs'
+                isDark ? 'border-rose-900/60 bg-rose-950/40 text-rose-300 hover:border-rose-400 hover:text-white' : 'border-stone-300 bg-white text-stone-800 hover:border-rose-600 hover:text-black shadow-xs'
               }`}
             >
               <span>SEAL CODEX</span>
@@ -368,7 +312,6 @@ export default function Grimoire({ isDark }) {
             </button>
           </div>
 
-          {/* ✦ TWO-PAGE BOOK SPREAD ✦ */}
           <AnimatePresence mode="wait">
             <motion.div
               key={currentPage}
@@ -378,17 +321,11 @@ export default function Grimoire({ isDark }) {
               transition={{ duration: 0.25, ease: 'easeInOut' }}
               className="relative min-h-[520px] flex flex-col justify-between"
             >
-              {/* Soft Center Crease */}
               <div className={`hidden lg:block absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-8 sm:w-10 pointer-events-none z-20 ${
-                isDark
-                  ? 'bg-gradient-to-r from-transparent via-black/45 to-transparent'
-                  : 'bg-gradient-to-r from-transparent via-stone-900/[0.07] to-transparent'
+                isDark ? 'bg-gradient-to-r from-transparent via-black/45 to-transparent' : 'bg-gradient-to-r from-transparent via-stone-900/[0.07] to-transparent'
               }`} />
 
-              {/* Main Content Columns */}
               <div className="grid grid-cols-1 lg:grid-cols-2 relative z-10">
-                
-                {/* ✦ LEFT PAGE (VERSO) ✦ */}
                 <div className="p-6 sm:p-10 lg:pr-14 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-rose-500/15 relative">
                   <div>
                     <div className="flex items-center justify-between text-[11px] font-mono tracking-widest text-rose-500/80 pb-3 border-b border-rose-500/15 uppercase mb-6">
@@ -396,9 +333,7 @@ export default function Grimoire({ isDark }) {
                       <span>VERSO</span>
                     </div>
 
-                    <h3 className={`text-2xl sm:text-3xl font-normal tracking-[0.16em] uppercase leading-tight ${
-                      isDark ? 'text-white' : 'text-stone-900 font-bold'
-                    }`}>
+                    <h3 className={`text-2xl sm:text-3xl font-normal tracking-[0.16em] uppercase leading-tight ${isDark ? 'text-white' : 'text-stone-900 font-bold'}`}>
                       {page.category}
                     </h3>
                     
@@ -421,12 +356,8 @@ export default function Grimoire({ isDark }) {
                     <div className={`p-4 rounded-lg border font-mono text-xs relative mb-6 ${
                       isDark ? 'border-rose-950/70 bg-rose-950/20 text-rose-200/90' : 'border-[#b88e60]/30 bg-rose-50/60 text-stone-800'
                     }`}>
-                      <span className="text-[10px] tracking-widest text-rose-500 font-bold block mb-1">
-                        // TECHNOMANCER'S MARGINALIA:
-                      </span>
-                      <span className="italic leading-relaxed">
-                        {page.scholarsNote}
-                      </span>
+                      <span className="text-[10px] tracking-widest text-rose-500 font-bold block mb-1">// TECHNOMANCER'S MARGINALIA:</span>
+                      <span className="italic leading-relaxed">{page.scholarsNote}</span>
                     </div>
 
                     <div className="flex items-center justify-center pt-2 font-mono text-xs text-rose-500/80">
@@ -434,14 +365,10 @@ export default function Grimoire({ isDark }) {
                     </div>
                   </div>
 
-                  {/* ✦ DOG-EAR CORNER: PREV FOLIO (THEMED BACKGROUND FLAP) ✦ */}
                   {currentPage > 0 && (
                     <motion.button
                       onClick={handlePrevPage}
-                      onMouseEnter={() => {
-                        setHoveredDogEar('prev');
-                        playHoverSound();
-                      }}
+                      onMouseEnter={() => { setHoveredDogEar('prev'); playHoverSound(); }}
                       onMouseLeave={() => setHoveredDogEar(null)}
                       className="cursor-none absolute bottom-0 left-0 w-16 h-16 z-30 group flex items-end justify-start focus:outline-none"
                       aria-label="Turn to Previous Folio"
@@ -465,7 +392,7 @@ export default function Grimoire({ isDark }) {
                         <path d="M48 48 L0 0 L48 0 Z" fill="rgba(0,0,0,0.2)" />
                         <path
                           d="M48 48 L0 0 L0 48 Z"
-                          fill={isDark ? '#22141c' : '#ede2d3'}
+                          fill={isDark ? '#26191b' : '#ede2d3'}
                           stroke={isDark ? '#c49a6c' : '#b88e60'}
                           strokeWidth="1.2"
                         />
@@ -475,7 +402,6 @@ export default function Grimoire({ isDark }) {
                   )}
                 </div>
 
-                {/* ✦ RIGHT PAGE (RECTO) ✦ */}
                 <div className="p-6 sm:p-10 lg:pl-14 flex flex-col justify-between relative">
                   <div>
                     <div className="flex items-center justify-between text-[11px] font-mono tracking-widest text-rose-500/80 pb-3 border-b border-rose-500/15 uppercase mb-6">
@@ -497,30 +423,16 @@ export default function Grimoire({ isDark }) {
                         >
                           <div className="flex items-baseline justify-between gap-3 mb-1">
                             <div className="flex items-baseline gap-2.5">
-                              <span className="font-mono text-xs font-bold text-rose-500 shrink-0 whitespace-nowrap select-none">
-                                {skill.num}.
-                              </span>
-                              <span className={`text-base font-bold tracking-wide group-hover:text-rose-500 transition-colors ${
-                                isDark ? 'text-white' : 'text-stone-900'
-                              }`}>
-                                {skill.name}
-                              </span>
+                              <span className="font-mono text-xs font-bold text-rose-500 shrink-0 whitespace-nowrap select-none">{skill.num}.</span>
+                              <span className={`text-base font-bold tracking-wide group-hover:text-rose-500 transition-colors ${isDark ? 'text-white' : 'text-stone-900'}`}>{skill.name}</span>
                             </div>
 
                             <div className="hidden sm:block flex-1 border-b border-dotted border-rose-500/30 mx-2" />
 
-                            <span className={`text-[11px] font-mono tracking-wider uppercase font-bold shrink-0 whitespace-nowrap ${
-                              isDark ? 'text-rose-400' : 'text-rose-700'
-                            }`}>
-                              [{skill.rank}]
-                            </span>
+                            <span className={`text-[11px] font-mono tracking-wider uppercase font-bold shrink-0 whitespace-nowrap ${isDark ? 'text-rose-400' : 'text-rose-700'}`}>[{skill.rank}]</span>
                           </div>
 
-                          <p className={`text-xs pl-7 leading-relaxed ${
-                            isDark ? 'text-rose-100/70' : 'text-stone-600'
-                          }`}>
-                            {skill.desc}
-                          </p>
+                          <p className={`text-xs pl-7 leading-relaxed ${isDark ? 'text-rose-100/70' : 'text-stone-600'}`}>{skill.desc}</p>
                         </div>
                       ))}
                     </div>
@@ -530,14 +442,10 @@ export default function Grimoire({ isDark }) {
                     <span className="tracking-widest font-semibold">— {page.pageRight} —</span>
                   </div>
 
-                  {/* ✦ DOG-EAR CORNER: NEXT FOLIO (FIXED VISIBILITY IN DARK MODE) ✦ */}
                   {currentPage < folios.length - 1 && (
                     <motion.button
                       onClick={handleNextPage}
-                      onMouseEnter={() => {
-                        setHoveredDogEar('next');
-                        playHoverSound();
-                      }}
+                      onMouseEnter={() => { setHoveredDogEar('next'); playHoverSound(); }}
                       onMouseLeave={() => setHoveredDogEar(null)}
                       className="cursor-none absolute bottom-0 right-0 w-16 h-16 z-30 group flex items-end justify-end focus:outline-none"
                       aria-label="Turn to Next Folio"
@@ -561,7 +469,7 @@ export default function Grimoire({ isDark }) {
                         <path d="M0 48 L48 0 L0 0 Z" fill="rgba(0,0,0,0.2)" />
                         <path
                           d="M0 48 L48 0 L48 48 Z"
-                          fill={isDark ? '#22141c' : '#ede2d3'}
+                          fill={isDark ? '#26191b' : '#ede2d3'}
                           stroke={isDark ? '#c49a6c' : '#b88e60'}
                           strokeWidth="1.2"
                         />
