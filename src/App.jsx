@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import RPGLoader from './components/RPGLoader';
 import RPGStartScreen from './components/RPGStartScreen';
@@ -12,7 +12,14 @@ import DesignLorePage from './components/DesignLorePage';
 import JtdinNdaPage from './components/JtdinNdaPage';
 import Contact from './components/Contact';
 import { Volume2, VolumeX, Undo2, Sun, Moon } from 'lucide-react';
-import { toggleMute, playClickSound, playHoverSound, stopAmbientSong } from './utils/sound';
+import { 
+  toggleMute, 
+  playClickSound, 
+  playHoverSound, 
+  startAmbientSong, 
+  stopAmbientSong,
+  initAutostartOnFirstInteraction 
+} from './utils/sound';
 
 export default function App() {
   const [gameState, setGameState] = useState('loading');
@@ -21,6 +28,11 @@ export default function App() {
   const [theme, setTheme] = useState('dark');
 
   const isDark = theme === 'dark';
+
+  // ✦ BROWSER UNLOCK: Starts audio on user's first click or tap ✦
+  useEffect(() => {
+    initAutostartOnFirstInteraction();
+  }, []);
 
   const handleMuteToggle = () => {
     const isNowMuted = toggleMute();
@@ -40,15 +52,21 @@ export default function App() {
     setGameState('start-screen');
   };
 
-// ✦ AUTO-START BGM WITH A 1-SECOND DELAY WHEN TITLE SCREEN APPEARS ✦
+  // ✦ ATTEMPT AUTO-START WHEN TITLE SCREEN APPEARS ✦
   const handleLoadingComplete = () => {
     setGameState('start-screen');
     setTimeout(() => {
+      // If browser allows it, it plays. If browser blocks it,
+      // initAutostartOnFirstInteraction will catch the first click!
       startAmbientSong();
-    }, 1000); // 1000ms = 1 second delay
+    }, 1000);
   };
 
   const handleSelectMenuOption = (sectionId) => {
+    playClickSound();
+    // Ensure BGM plays when user enters game from start screen
+    startAmbientSong();
+
     if (sectionId === 'lore') {
       setActiveSubPage('lore');
       setGameState('in-game');
@@ -153,9 +171,9 @@ export default function App() {
         )}
       </AnimatePresence>
 
-      {/* 6. The In-Game World inside the Master Parchment Scroll */}
+      {/* 6. The In-Game World inside the Master Parchment Scroll (Enlarged to max-w-7xl) */}
       {gameState === 'in-game' && (
-        <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-8 pt-16 pb-12">
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-8 pt-16 pb-12">
           <AnimatePresence mode="wait">
             {activeSubPage === 'lore' && (
               <DesignLorePage key="lore" isDark={isDark} onBack={() => setActiveSubPage(null)} />

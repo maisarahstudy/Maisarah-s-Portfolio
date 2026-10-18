@@ -178,7 +178,7 @@ export default function Projects({ isDark, onOpenPage }) {
 
             {/* Title & Lore Description */}
             <div className="mb-6">
-              <h3 className={`text-2xl sm:text-3xl font-bold tracking-wide transition-colors flex items-center justify-between ${
+              <h3 className={`text-lg sm:text-2xl font-bold tracking-tight transition-colors flex items-center justify-between ${
                 isDark ? 'text-white group-hover:text-rose-200' : 'text-stone-900 group-hover:text-rose-900'
               }`}>
                 <span>{quest.title}</span>

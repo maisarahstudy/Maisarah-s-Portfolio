@@ -2,18 +2,64 @@
 let isMuted = false;
 let ensembleInterval = null;
 let bgmAudioElement = null;
+let hasAutoStarted = false;
 
+/**
+ * Returns or instantiates the AudioContext safely.
+ */
 function getAudioContext() {
+  if (typeof window === 'undefined') return null;
+
   if (!audioCtx) {
     const AudioContextClass = window.AudioContext || window.webkitAudioContext;
-    audioCtx = new AudioContextClass();
+    if (AudioContextClass) {
+      audioCtx = new AudioContextClass();
+    }
   }
-  if (audioCtx.state === 'suspended') {
-    audioCtx.resume();
+
+  if (audioCtx && audioCtx.state === 'suspended') {
+    audioCtx.resume().catch(() => {});
   }
+
   return audioCtx;
 }
 
+/**
+ * Browsers block audio before user interaction.
+ * Call this once in your App component to start the music on the first click/tap.
+ */
+export const initAutostartOnFirstInteraction = () => {
+  if (typeof window === 'undefined' || hasAutoStarted) return;
+
+  const handleFirstInteraction = () => {
+    if (hasAutoStarted) return;
+    hasAutoStarted = true;
+
+    // Unlock Web Audio context
+    const ctx = getAudioContext();
+    if (ctx && ctx.state === 'suspended') {
+      ctx.resume().catch(() => {});
+    }
+
+    // Start background music if not muted
+    if (!isMuted) {
+      startAmbientSong();
+    }
+
+    // Remove event listeners once triggered
+    window.removeEventListener('pointerdown', handleFirstInteraction);
+    window.removeEventListener('keydown', handleFirstInteraction);
+    window.removeEventListener('touchstart', handleFirstInteraction);
+  };
+
+  window.addEventListener('pointerdown', handleFirstInteraction, { once: true, passive: true });
+  window.addEventListener('keydown', handleFirstInteraction, { once: true, passive: true });
+  window.addEventListener('touchstart', handleFirstInteraction, { once: true, passive: true });
+};
+
+/**
+ * Toggle mute / unmute
+ */
 export const toggleMute = () => {
   isMuted = !isMuted;
   if (isMuted) {
@@ -26,8 +72,13 @@ export const toggleMute = () => {
 
 export const getMuted = () => isMuted;
 
+/**
+ * Sound Helper: Gentle Tone
+ */
 function playGentleTone(freq, startTime, duration = 0.5, peakVol = 0.02) {
   const ctx = getAudioContext();
+  if (!ctx) return;
+
   const osc = ctx.createOscillator();
   const gain = ctx.createGain();
 
@@ -49,6 +100,7 @@ export const playHoverSound = () => {
   if (isMuted) return;
   try {
     const ctx = getAudioContext();
+    if (!ctx) return;
     const now = ctx.currentTime;
     playGentleTone(523.25, now, 0.25, 0.015);
   } catch {}
@@ -58,6 +110,7 @@ export const playClickSound = () => {
   if (isMuted) return;
   try {
     const ctx = getAudioContext();
+    if (!ctx) return;
     const now = ctx.currentTime;
     playGentleTone(392.00, now, 0.4, 0.025);
     playGentleTone(587.33, now + 0.03, 0.5, 0.02);
@@ -70,6 +123,7 @@ export const playLoadingCompleteSound = () => {
   if (isMuted) return;
   try {
     const ctx = getAudioContext();
+    if (!ctx) return;
     const now = ctx.currentTime;
     const notes = [261.63, 329.63, 392.00, 523.25];
     notes.forEach((freq, idx) => {
@@ -82,6 +136,7 @@ export const playBookOpenSound = () => {
   if (isMuted) return;
   try {
     const ctx = getAudioContext();
+    if (!ctx) return;
     const now = ctx.currentTime;
 
     const thudOsc = ctx.createOscillator();
@@ -124,6 +179,7 @@ export const playBookCloseSound = () => {
   if (isMuted) return;
   try {
     const ctx = getAudioContext();
+    if (!ctx) return;
     const now = ctx.currentTime;
 
     const thudOsc = ctx.createOscillator();
@@ -165,6 +221,7 @@ export const playPageFlipSound = () => {
   if (isMuted) return;
   try {
     const ctx = getAudioContext();
+    if (!ctx) return;
     const bufferSize = ctx.sampleRate * 0.15;
     const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
     const data = buffer.getChannelData(0);
@@ -191,8 +248,11 @@ export const playPageFlipSound = () => {
   } catch {}
 };
 
+/**
+ * Starts BGM (tries /bgm.mp3 first, falls back to Web Audio Synthesizer)
+ */
 export const startAmbientSong = () => {
-  if (isMuted) return;
+  if (isMuted || typeof window === 'undefined') return;
 
   if (!bgmAudioElement) {
     bgmAudioElement = new Audio('/bgm.mp3');
@@ -200,11 +260,19 @@ export const startAmbientSong = () => {
     bgmAudioElement.volume = 0.22;
   }
 
+  // Attempt to play the audio file
   bgmAudioElement.play().catch(() => {
+    // If the audio file is blocked or unavailable, fall back to the procedural synth
     if (ensembleInterval) return;
 
     try {
       const ctx = getAudioContext();
+      if (!ctx) return;
+
+      if (ctx.state === 'suspended') {
+        ctx.resume().catch(() => {});
+      }
+
       const chords = [
         { bass: 130.81, pad: [261.63, 329.63, 392.00] },
         { bass: 123.47, pad: [246.94, 329.63, 392.00] },
@@ -306,9 +374,13 @@ export const startAmbientSong = () => {
   });
 };
 
+/**
+ * Stops both audio element and procedural loop
+ */
 export const stopAmbientSong = () => {
   if (bgmAudioElement) {
     bgmAudioElement.pause();
+    bgmAudioElement.currentTime = 0;
   }
   if (ensembleInterval) {
     clearInterval(ensembleInterval);
