@@ -2,6 +2,8 @@
 let isMuted = false;
 let ensembleInterval = null;
 let bgmAudioElement = null;
+let bgmGainNode = null;
+let activeOscillators = [];
 let hasAutoStarted = false;
 
 /**
@@ -17,16 +19,24 @@ function getAudioContext() {
     }
   }
 
-  if (audioCtx && audioCtx.state === 'suspended') {
-    audioCtx.resume().catch(() => {});
+  if (audioCtx) {
+    if (audioCtx.state === 'suspended') {
+      audioCtx.resume().catch(() => {});
+    }
+
+    // Master BGM Gain Node: allows INSTANT cutoff of all playing/scheduled BGM notes
+    if (!bgmGainNode) {
+      bgmGainNode = audioCtx.createGain();
+      bgmGainNode.gain.setValueAtTime(isMuted ? 0 : 1, audioCtx.currentTime);
+      bgmGainNode.connect(audioCtx.destination);
+    }
   }
 
   return audioCtx;
 }
 
 /**
- * Browsers block audio before user interaction.
- * Call this once in your App component to start the music on the first click/tap.
+ * Browser interaction unlock listener
  */
 export const initAutostartOnFirstInteraction = () => {
   if (typeof window === 'undefined' || hasAutoStarted) return;
@@ -35,18 +45,15 @@ export const initAutostartOnFirstInteraction = () => {
     if (hasAutoStarted) return;
     hasAutoStarted = true;
 
-    // Unlock Web Audio context
     const ctx = getAudioContext();
     if (ctx && ctx.state === 'suspended') {
-      ctx.resume().catch(() => {});
+      ctx.resume().then(() => {
+        if (!isMuted) startAmbientSong();
+      }).catch(() => {});
+    } else {
+      if (!isMuted) startAmbientSong();
     }
 
-    // Start background music if not muted
-    if (!isMuted) {
-      startAmbientSong();
-    }
-
-    // Remove event listeners once triggered
     window.removeEventListener('pointerdown', handleFirstInteraction);
     window.removeEventListener('keydown', handleFirstInteraction);
     window.removeEventListener('touchstart', handleFirstInteraction);
@@ -58,24 +65,27 @@ export const initAutostartOnFirstInteraction = () => {
 };
 
 /**
- * Toggle mute / unmute
+ * Toggle mute / unmute with INSTANT cutoff
  */
 export const toggleMute = () => {
   isMuted = !isMuted;
+
   if (isMuted) {
     stopAmbientSong();
   } else {
     startAmbientSong();
   }
+
   return isMuted;
 };
 
 export const getMuted = () => isMuted;
 
 /**
- * Sound Helper: Gentle Tone
+ * Sound Helper: Gentle Tone for UI Clicks & Hovers
  */
 function playGentleTone(freq, startTime, duration = 0.5, peakVol = 0.02) {
+  if (isMuted) return;
   const ctx = getAudioContext();
   if (!ctx) return;
 
@@ -249,10 +259,21 @@ export const playPageFlipSound = () => {
 };
 
 /**
- * Starts BGM (tries /bgm.mp3 first, falls back to Web Audio Synthesizer)
+ * Starts Ambient BGM
  */
 export const startAmbientSong = () => {
   if (isMuted || typeof window === 'undefined') return;
+
+  const ctx = getAudioContext();
+  if (ctx && ctx.state === 'suspended') {
+    ctx.resume().catch(() => {});
+  }
+
+  // Restore Master BGM volume immediately
+  if (bgmGainNode && ctx) {
+    bgmGainNode.gain.cancelScheduledValues(ctx.currentTime);
+    bgmGainNode.gain.setValueAtTime(1, ctx.currentTime);
+  }
 
   if (!bgmAudioElement) {
     bgmAudioElement = new Audio('/bgm.mp3');
@@ -260,18 +281,13 @@ export const startAmbientSong = () => {
     bgmAudioElement.volume = 0.22;
   }
 
-  // Attempt to play the audio file
+  // Try playing audio file first
   bgmAudioElement.play().catch(() => {
-    // If the audio file is blocked or unavailable, fall back to the procedural synth
-    if (ensembleInterval) return;
+    // If audio file doesn't exist or is blocked, run procedural Web Audio synth
+    if (ensembleInterval) return; // already running
 
     try {
-      const ctx = getAudioContext();
       if (!ctx) return;
-
-      if (ctx.state === 'suspended') {
-        ctx.resume().catch(() => {});
-      }
 
       const chords = [
         { bass: 130.81, pad: [261.63, 329.63, 392.00] },
@@ -315,9 +331,10 @@ export const startAmbientSong = () => {
           bassGain.gain.exponentialRampToValueAtTime(0.00001, chordTime + 2.3);
 
           bassOsc.connect(bassGain);
-          bassGain.connect(ctx.destination);
+          bassGain.connect(bgmGainNode); // connects to master BGM gain
           bassOsc.start(chordTime);
           bassOsc.stop(chordTime + 2.4);
+          activeOscillators.push(bassOsc);
 
           chord.pad.forEach((freq) => {
             const padOsc = ctx.createOscillator();
@@ -330,9 +347,10 @@ export const startAmbientSong = () => {
             padGain.gain.exponentialRampToValueAtTime(0.00001, chordTime + 2.35);
 
             padOsc.connect(padGain);
-            padGain.connect(ctx.destination);
+            padGain.connect(bgmGainNode);
             padOsc.start(chordTime);
             padOsc.stop(chordTime + 2.4);
+            activeOscillators.push(padOsc);
           });
         });
 
@@ -357,14 +375,16 @@ export const startAmbientSong = () => {
           harmGain.gain.exponentialRampToValueAtTime(0.00001, noteTime + 0.55);
 
           mbOsc.connect(mbGain);
-          mbGain.connect(ctx.destination);
+          mbGain.connect(bgmGainNode);
           harmOsc.connect(harmGain);
-          harmGain.connect(ctx.destination);
+          harmGain.connect(bgmGainNode);
 
           mbOsc.start(noteTime);
           mbOsc.stop(noteTime + 0.9);
           harmOsc.start(noteTime);
           harmOsc.stop(noteTime + 0.6);
+
+          activeOscillators.push(mbOsc, harmOsc);
         });
       };
 
@@ -375,15 +395,33 @@ export const startAmbientSong = () => {
 };
 
 /**
- * Stops both audio element and procedural loop
+ * Stops BGM INSTANTLY (cuts audio element, cancels gain, and stops all oscillators)
  */
 export const stopAmbientSong = () => {
+  // 1. Instantly silence MP3 file
   if (bgmAudioElement) {
     bgmAudioElement.pause();
     bgmAudioElement.currentTime = 0;
   }
+
+  // 2. Clear loop timer
   if (ensembleInterval) {
     clearInterval(ensembleInterval);
     ensembleInterval = null;
   }
+
+  // 3. Instantly mute master BGM gain node (0 ms latency)
+  if (bgmGainNode && audioCtx) {
+    bgmGainNode.gain.cancelScheduledValues(audioCtx.currentTime);
+    bgmGainNode.gain.setValueAtTime(0, audioCtx.currentTime);
+  }
+
+  // 4. Force-stop and purge all running Web Audio oscillators
+  activeOscillators.forEach((osc) => {
+    try {
+      osc.stop();
+      osc.disconnect();
+    } catch {}
+  });
+  activeOscillators = [];
 };

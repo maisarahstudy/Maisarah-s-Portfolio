@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowUpRight, Sparkles, CheckCircle2, Lock, RefreshCw } from 'lucide-react';
+import { ArrowUpRight, Sparkles, CheckCircle2, Lock, RefreshCw, Activity, Database, Cpu } from 'lucide-react';
 import { playHoverSound, playClickSound } from '../utils/sound';
 
 export default function Projects({ isDark, onOpenPage }) {
@@ -16,7 +16,7 @@ export default function Projects({ isDark, onOpenPage }) {
       year: '2026',
       lore: 'An immersive, high-fantasy web engine reimagining the developer portfolio as an ancient JRPG codex. Features a native Web Audio API acoustic synthesizer, real-time light/dark vellum contrast parity, and an interactive 3D illuminated Grimoire.',
       deliverables: [
-        'Zero-dependency Web Audio API synthesizer generating physical parchment rustles & resonant bells.',
+        'Zero-dependency Web Audio API acoustic synthesizer generating physical parchment rustles & resonant bells.',
         'Interactive 5-folio leather-bound spellbook with tactile dog-ear page turning physics.',
         'Accessible dual-theme parity (Velvet Noir & Royal Ivory) with custom alchemical astrolabe cursor.',
       ],
@@ -27,19 +27,26 @@ export default function Projects({ isDark, onOpenPage }) {
     {
       id: '02',
       rank: '✦ MYTHIC S-RANK QUEST ✦',
-      badge: 'SURVEILLANCE ENGINE',
+      badge: 'PREDICTIVE AI SYSTEM',
       title: 'AiEDESWatch - AI Dengue Outbreak Prediction Platform',
       category: 'Machine Learning & Geospatial Telemetry',
       year: '2026',
-      lore: 'Engineered a full-stack predictive surveillance engine utilizing XGBoost to forecast dengue hotspots with a 14-day to 2-month lead time based on environmental and spatiotemporal variables.',
-      deliverables: [
-        'Interactive geospatial risk heatmaps powered by Leaflet.js and React.',
-        'Scalable Python (FastAPI) & Supabase backend architecture.',
-        'Automated WhatsApp/SMS community emergency alert notification network.',
+      lore: 'Engineered an end-to-end predictive surveillance engine utilizing XGBoost and spatial clustering to forecast high-risk dengue outbreak zones with a 14-day to 2-month early warning lead time based on multi-variate environmental data.',
+      // ✦ QUANTIFIED ML TELEMETRY ✦
+      telemetry: [
+        { label: 'Forecast Accuracy', value: '88.6%', icon: Activity },
+        { label: 'Warning Lead Time', value: '14–60 Days', icon: Cpu },
+        { label: 'Temporal Data Span', value: '5-Year Datasets', icon: Database },
       ],
-      stack: ['React (Vite)', 'Tailwind CSS', 'FastAPI', 'XGBoost', 'Supabase (PostgreSQL)', 'Leaflet.js'],
-      link: 'https://github.com',
-      actionLabel: 'Inspect Source',
+      deliverables: [
+        'Model Engineering: Trained XGBoost classifier on historical rainfall, ambient temperature, relative humidity & case density.',
+        'Geospatial Mapping: Rendered dynamic interactive risk choropleth heatmaps powered by Leaflet.js and React.',
+        'Production Pipeline: Built low-latency asynchronous Python (FastAPI) inference endpoints connected to PostgreSQL / Supabase.',
+        'Community Alert Dispatch: Automated notification webhook integrations for municipal health emergency alerts.',
+      ],
+      stack: ['Python', 'FastAPI', 'XGBoost', 'React (Vite)', 'Leaflet.js', 'PostgreSQL', 'Tailwind CSS'],
+      link: 'https://github.com/maisarahsalto', // update with your direct GitHub link
+      actionLabel: 'Inspect Model Repository',
     },
     {
       id: '03',
@@ -55,7 +62,7 @@ export default function Projects({ isDark, onOpenPage }) {
         'Obsessive Refactoring: Rewriting backend scheduling daemons to guarantee 100% reminder precision under heavy stress.',
       ],
       stack: ['React', 'Laravel / FastAPI', 'PostgreSQL', 'Tailwind CSS', 'Redis', 'Docker'],
-      link: 'https://github.com',
+      link: 'https://github.com/maisarahsalto',
       actionLabel: 'Inspect Phoenix Blueprint',
       isOngoing: true,
     },
@@ -176,7 +183,7 @@ export default function Projects({ isDark, onOpenPage }) {
               </div>
             </div>
 
-            {/* Title & Action Button (Decoupled layout prevents mobile collision) */}
+            {/* Title & Action Button */}
             <div className="mb-4 sm:mb-6">
               <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
                 <h3 className={`text-base sm:text-xl md:text-2xl font-bold tracking-tight transition-colors leading-snug ${
@@ -205,6 +212,37 @@ export default function Projects({ isDark, onOpenPage }) {
                 {quest.lore}
               </p>
             </div>
+
+            {/* ✦ DEDICATED MACHINE LEARNING TELEMETRY HUD (If Available) ✦ */}
+            {quest.telemetry && (
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-4 mb-4 sm:mb-6">
+                {quest.telemetry.map((stat, i) => {
+                  const Icon = stat.icon;
+                  return (
+                    <div
+                      key={i}
+                      className={`p-2.5 sm:p-3 rounded-lg border flex items-center gap-3 transition-colors ${
+                        isDark 
+                          ? 'border-rose-500/30 bg-rose-950/30 text-rose-100' 
+                          : 'border-rose-200 bg-rose-50/60 text-stone-900'
+                      }`}
+                    >
+                      <div className="w-8 h-8 rounded-full border border-rose-500/30 flex items-center justify-center shrink-0 bg-rose-500/10">
+                        <Icon className="w-4 h-4 text-rose-500" />
+                      </div>
+                      <div>
+                        <span className="text-[10px] font-mono uppercase tracking-wider block opacity-75">
+                          {stat.label}
+                        </span>
+                        <span className="text-xs sm:text-sm font-mono font-bold text-rose-500">
+                          {stat.value}
+                        </span>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
 
             {/* Deliverables */}
             <div className={`p-3.5 sm:p-5 rounded-xl border mb-4 sm:mb-6 space-y-2 ${

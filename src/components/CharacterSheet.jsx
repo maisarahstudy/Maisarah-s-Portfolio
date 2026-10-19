@@ -10,7 +10,8 @@ import {
   Briefcase, 
   GraduationCap, 
   User, 
-  FileText 
+  FileText,
+  Compass
 } from 'lucide-react';
 import { playHoverSound, playClickSound } from '../utils/sound';
 import Grimoire from './Grimoire';
@@ -99,11 +100,11 @@ export default function CharacterSheet({ isDark }) {
         </div>
       </div>
 
-      {/* ✦ 1. UNIFIED GLASSMORPHIC DOSSIER TABLETS ✦ */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-start mb-8 sm:mb-12">
+      {/* ✦ 1. UNIFIED GLASSMORPHIC DOSSIER TABLETS (EQUAL HEIGHT ALIGNMENT) ✦ */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-stretch mb-8 sm:mb-12">
         
-        {/* Left Column: Avatar & Vitals Codex Tablet */}
-        <div className={`lg:col-span-5 rounded-2xl border-2 p-4 sm:p-7 relative overflow-hidden backdrop-blur-md transition-all duration-500 ${
+        {/* Left Column: Avatar & Vitals Codex Tablet (Flex h-full ensures bottom matches right side) */}
+        <div className={`lg:col-span-5 rounded-2xl border-2 p-5 sm:p-7 relative overflow-hidden backdrop-blur-md transition-all duration-500 flex flex-col justify-between ${
           isDark
             ? 'border-[#c49a6c]/60 bg-[#12080f]/80 shadow-[0_0_40px_rgba(244,63,94,0.18)]'
             : 'border-[#b88e60]/60 bg-white/80 shadow-[0_8px_30px_rgba(184,142,96,0.12)]'
@@ -117,8 +118,9 @@ export default function CharacterSheet({ isDark }) {
             isDark ? 'border-[#c49a6c]/25' : 'border-[#b88e60]/20'
           }`} />
 
-          <div className="mt-2 sm:mt-4 flex flex-col items-center text-center relative z-10">
-            <div className="relative w-32 h-32 sm:w-40 sm:h-40 flex items-center justify-center mb-4 sm:mb-6">
+          {/* Top: Avatar & Identity Header */}
+          <div className="flex flex-col items-center text-center relative z-10">
+            <div className="relative w-32 h-32 sm:w-36 sm:h-36 flex items-center justify-center mb-3 sm:mb-4">
               <motion.div
                 animate={{ rotate: 360 }}
                 transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
@@ -126,30 +128,34 @@ export default function CharacterSheet({ isDark }) {
                   isDark ? 'border-[#c49a6c]/50' : 'border-[#b88e60]/50'
                 }`}
               />
-              <div className={`w-24 h-24 sm:w-32 sm:h-32 rounded-full border-2 flex items-center justify-center ${
+              <div className={`w-24 h-24 sm:w-28 sm:h-28 rounded-full border-2 flex items-center justify-center ${
                 isDark
                   ? 'border-rose-400/60 bg-gradient-to-b from-rose-950/80 to-black shadow-[0_0_25px_rgba(244,63,94,0.35)]'
                   : 'border-rose-600/70 bg-gradient-to-b from-rose-50 to-white shadow-md'
               }`}>
-                <Shield className="w-12 h-12 sm:w-16 sm:h-16 stroke-1 text-rose-500 drop-shadow-[0_0_10px_rgba(244,63,94,0.6)]" />
+                <Shield className="w-12 h-12 sm:w-14 sm:h-14 stroke-1 text-rose-500 drop-shadow-[0_0_10px_rgba(244,63,94,0.6)]" />
               </div>
             </div>
 
             <h3 className={`text-xl sm:text-2xl font-bold tracking-wide ${isDark ? 'text-white' : 'text-stone-900'}`}>
               Nur Fatihah Maisarah
             </h3>
-            <p className={`text-xs sm:text-sm font-mono font-semibold mt-1 ${isDark ? 'text-rose-200' : 'text-rose-800'}`}>
+            <p className={`text-xs sm:text-sm font-mono font-semibold mt-0.5 ${isDark ? 'text-rose-200' : 'text-rose-800'}`}>
               Binti Salto @ Suharto
             </p>
-            <span className={`mt-3 px-3 py-1 sm:px-4 sm:py-1.5 rounded-full text-[11px] sm:text-xs font-mono border font-semibold ${
-              isDark
-                ? 'border-rose-500/40 bg-rose-900/40 text-rose-200 shadow-sm'
-                : 'border-rose-300 bg-rose-50 text-rose-950 shadow-xs'
-            }`}>
-              Full-Stack Software Engineer · Applied AI
-            </span>
 
-            {/* ✦ 1-CLICK RESUME / GUILD DOSSIER DOWNLOAD ✦ */}
+            {/* Clean, Non-Awkward Title Badge */}
+            <div className="mt-3 flex flex-col items-center gap-1 w-full max-w-xs">
+              <span className={`w-full py-1.5 px-3 rounded-full text-xs font-sans font-semibold border text-center transition-colors ${
+                isDark
+                  ? 'border-rose-500/40 bg-rose-900/40 text-rose-200 shadow-sm'
+                  : 'border-rose-300 bg-rose-50 text-rose-950 shadow-xs'
+              }`}>
+                Full-Stack Software Engineer · Applied AI
+              </span>
+            </div>
+
+            {/* 1-Click PDF Resume Button */}
             <a
               href="/(BI)%20Resume%20Nur%20Fatihah%20Maisarah%20(2026).pdf"
               download="(BI) Resume Nur Fatihah Maisarah (2026).pdf"
@@ -157,7 +163,7 @@ export default function CharacterSheet({ isDark }) {
               rel="noopener noreferrer"
               onMouseEnter={playHoverSound}
               onClick={playClickSound}
-              className={`mt-4 inline-flex items-center justify-center gap-2 px-4 py-2 rounded-full border text-xs font-mono uppercase tracking-wider font-bold transition-all w-full active:scale-95 ${
+              className={`mt-3 inline-flex items-center justify-center gap-2 px-4 py-2 rounded-full border text-xs font-mono uppercase tracking-wider font-bold transition-all w-full max-w-xs active:scale-95 ${
                 isDark
                   ? 'border-[#c49a6c] bg-rose-950/60 text-rose-200 hover:bg-rose-500 hover:text-black shadow-[0_0_15px_rgba(244,63,94,0.3)]'
                   : 'border-[#b88e60] bg-white text-stone-900 hover:bg-rose-50 hover:border-rose-600 shadow-sm'
@@ -168,8 +174,8 @@ export default function CharacterSheet({ isDark }) {
             </a>
           </div>
 
-          {/* Vitals Bars */}
-          <div className="mt-6 sm:mt-8 space-y-4 font-mono text-xs sm:text-sm relative z-10">
+          {/* Middle: Vitals Progress Bars */}
+          <div className="my-6 space-y-4 font-mono text-xs sm:text-sm relative z-10">
             <div>
               <div className={`flex justify-between font-semibold mb-1.5 text-xs sm:text-sm ${isDark ? 'text-rose-200' : 'text-stone-800'}`}>
                 <span className="flex items-center gap-1.5"><Heart className="w-3.5 h-3.5 text-rose-500 fill-current shrink-0" /> VITALITY</span>
@@ -191,25 +197,34 @@ export default function CharacterSheet({ isDark }) {
             </div>
           </div>
 
-          {/* Base Realm details */}
-          <div className={`mt-6 pt-4 border-t font-mono text-xs sm:text-sm space-y-1.5 relative z-10 ${
+          {/* Bottom: Realm Specs & Relocation/Remote Availability (Item #2!) */}
+          <div className={`pt-4 border-t font-mono text-[11px] sm:text-xs space-y-2 relative z-10 ${
             isDark ? 'border-[#c49a6c]/30 text-stone-300' : 'border-[#b88e60]/30 text-stone-700'
           }`}>
-            <div className="flex flex-col xs:flex-row xs:justify-between gap-0.5">
-              <span>BASE REALM:</span> 
+            <div className="flex justify-between items-center">
+              <span className="opacity-75">BASE REALM:</span> 
               <span className="font-bold text-rose-500">Kota Kinabalu, Sabah</span>
             </div>
-            <div className="flex flex-col xs:flex-row xs:justify-between gap-0.5">
-              <span>CREDENTIALS:</span> 
+            
+            <div className="flex justify-between items-center">
+              <span className="opacity-75 flex items-center gap-1">
+                <Compass className="w-3 h-3 text-rose-400" /> AVAILABILITY:
+              </span> 
+              <span className="font-bold text-emerald-400">Remote & Relocation (KL / SG)</span>
+            </div>
+
+            <div className="flex justify-between items-center">
+              <span className="opacity-75">CREDENTIALS:</span> 
               <span className="font-bold text-rose-500">UiTM & Gamuda AI Alumna</span>
             </div>
           </div>
         </div>
 
         {/* Right Column: About Me Bio & Capabilities */}
-        <div className="lg:col-span-7 space-y-6">
+        <div className="lg:col-span-7 flex flex-col justify-between gap-6">
           
-          <div className={`rounded-2xl border-2 p-4 sm:p-7 backdrop-blur-md transition-all duration-500 relative overflow-hidden ${
+          {/* Top Right Card: Biography */}
+          <div className={`rounded-2xl border-2 p-5 sm:p-7 backdrop-blur-md transition-all duration-500 relative overflow-hidden flex-1 flex flex-col justify-between ${
             isDark
               ? 'border-[#c49a6c]/60 bg-[#12080f]/80 shadow-[0_0_40px_rgba(244,63,94,0.18)]'
               : 'border-[#b88e60]/60 bg-white/80 shadow-[0_8px_30px_rgba(184,142,96,0.12)]'
@@ -220,13 +235,13 @@ export default function CharacterSheet({ isDark }) {
               isDark ? 'border-[#c49a6c]/25' : 'border-[#b88e60]/20'
             }`} />
 
-            <h4 className={`text-xs sm:text-sm font-mono uppercase tracking-widest mb-3.5 flex items-center gap-2 font-bold relative z-10 ${
+            <h4 className={`text-xs sm:text-sm font-mono uppercase tracking-widest mb-3 flex items-center gap-2 font-bold relative z-10 ${
               isDark ? 'text-rose-200' : 'text-stone-900'
             }`}>
               <User className="w-4 h-4 text-rose-500 shrink-0" /> Technomancer Biography (About Me)
             </h4>
 
-            <div className={`space-y-3.5 text-xs sm:text-base leading-relaxed relative z-10 font-sans font-normal ${
+            <div className={`space-y-3 text-xs sm:text-[14px] leading-relaxed relative z-10 font-sans font-normal ${
               isDark ? 'text-rose-100/85' : 'text-stone-700'
             }`}>
               <p>
@@ -238,7 +253,8 @@ export default function CharacterSheet({ isDark }) {
             </div>
           </div>
 
-          <div className={`rounded-2xl border-2 p-4 sm:p-7 backdrop-blur-md transition-all duration-500 relative overflow-hidden ${
+          {/* Bottom Right Card: Capabilities */}
+          <div className={`rounded-2xl border-2 p-5 sm:p-7 backdrop-blur-md transition-all duration-500 relative overflow-hidden flex-1 flex flex-col justify-between ${
             isDark
               ? 'border-[#c49a6c]/60 bg-[#12080f]/80 shadow-[0_0_40px_rgba(244,63,94,0.18)]'
               : 'border-[#b88e60]/60 bg-white/80 shadow-[0_8px_30px_rgba(184,142,96,0.12)]'
@@ -254,6 +270,7 @@ export default function CharacterSheet({ isDark }) {
             }`}>
               <Code2 className="w-4 h-4 text-rose-500 shrink-0" /> Core Combat Capabilities
             </h4>
+            
             <div className="space-y-3.5 relative z-10">
               {stats.map((stat) => (
                 <div key={stat.name} className="font-mono text-xs sm:text-sm">

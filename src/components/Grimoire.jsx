@@ -4,7 +4,7 @@ import { Sparkles, X, Lock, Bookmark, ChevronLeft, ChevronRight } from 'lucide-r
 import { playHoverSound, playPageFlipSound, playBookOpenSound, playBookCloseSound } from '../utils/sound';
 
 const SigilLanguages = ({ isDark }) => (
-  <svg viewBox="0 0 120 120" className="w-24 h-24 sm:w-28 sm:h-28 mx-auto" fill="none">
+  <svg viewBox="0 0 120 120" className="w-full h-full" fill="none">
     <circle cx="60" cy="60" r="54" stroke={isDark ? '#f43f5e' : '#b88e60'} strokeWidth="1" strokeDasharray="3 3" opacity="0.6" />
     <circle cx="60" cy="60" r="46" stroke={isDark ? '#c49a6c' : '#8a5d30'} strokeWidth="1.2" opacity="0.8" />
     <polygon points="60,18 73,88 23,45 97,45 47,88" stroke={isDark ? '#fb7185' : '#be123c'} strokeWidth="1" />
@@ -19,7 +19,7 @@ const SigilLanguages = ({ isDark }) => (
 );
 
 const SigilWeb = ({ isDark }) => (
-  <svg viewBox="0 0 120 120" className="w-24 h-24 sm:w-28 sm:h-28 mx-auto" fill="none">
+  <svg viewBox="0 0 120 120" className="w-full h-full" fill="none">
     <circle cx="60" cy="60" r="54" stroke={isDark ? '#f43f5e' : '#b88e60'} strokeWidth="1" opacity="0.6" />
     <polygon points="60,16 98,38 98,82 60,104 22,82 22,38" stroke={isDark ? '#c49a6c' : '#8a5d30'} strokeWidth="1.2" />
     <polygon points="60,28 87,44 87,76 60,92 33,76 33,44" stroke={isDark ? '#fb7185' : '#be123c'} strokeWidth="1" strokeDasharray="2 2" />
@@ -32,7 +32,7 @@ const SigilWeb = ({ isDark }) => (
 );
 
 const SigilVaults = ({ isDark }) => (
-  <svg viewBox="0 0 120 120" className="w-24 h-24 sm:w-28 sm:h-28 mx-auto" fill="none">
+  <svg viewBox="0 0 120 120" className="w-full h-full" fill="none">
     <circle cx="60" cy="60" r="54" stroke={isDark ? '#c49a6c' : '#8a5d30'} strokeWidth="1.2" />
     <circle cx="60" cy="60" r="48" stroke={isDark ? '#f43f5e' : '#b88e60'} strokeWidth="0.8" strokeDasharray="4 2" />
     <rect x="36" y="36" width="48" height="48" stroke={isDark ? '#fb7185' : '#be123c'} strokeWidth="1.2" transform="rotate(45 60 60)" />
@@ -44,7 +44,7 @@ const SigilVaults = ({ isDark }) => (
 );
 
 const SigilAlchemy = ({ isDark }) => (
-  <svg viewBox="0 0 120 120" className="w-24 h-24 sm:w-28 sm:h-28 mx-auto" fill="none">
+  <svg viewBox="0 0 120 120" className="w-full h-full" fill="none">
     <circle cx="60" cy="60" r="54" stroke={isDark ? '#f43f5e' : '#b88e60'} strokeWidth="1" opacity="0.6" />
     <circle cx="60" cy="60" r="38" stroke={isDark ? '#c49a6c' : '#8a5d30'} strokeWidth="1" />
     <path d="M60 22 A 38 38 0 0 1 98 60 A 19 19 0 0 1 79 79 A 9.5 9.5 0 0 1 69.5 69.5" stroke={isDark ? '#fb7185' : '#be123c'} strokeWidth="1.2" />
@@ -57,7 +57,7 @@ const SigilAlchemy = ({ isDark }) => (
 );
 
 const SigilTongues = ({ isDark }) => (
-  <svg viewBox="0 0 120 120" className="w-24 h-24 sm:w-28 sm:h-28 mx-auto" fill="none">
+  <svg viewBox="0 0 120 120" className="w-full h-full" fill="none">
     <circle cx="60" cy="60" r="54" stroke={isDark ? '#f43f5e' : '#b88e60'} strokeWidth="1" strokeDasharray="3 3" opacity="0.7" />
     <circle cx="60" cy="46" r="26" stroke={isDark ? '#c49a6c' : '#8a5d30'} strokeWidth="1.2" />
     <circle cx="48" cy="68" r="26" stroke={isDark ? '#fb7185' : '#be123c'} strokeWidth="1.2" />
@@ -77,7 +77,7 @@ export default function Grimoire({ isDark }) {
       pageLeft: '1', pageRight: '2', chapter: 'FOLIO I', latinTitle: 'De Dialectis Primis',
       category: 'PRIMARY SCRIPT LANGUAGES', subtitle: 'Core Syntax & Logic Invocations',
       folioLore: 'The foundational dialects used to summon backend structures, algorithmic logic, and asynchronous data streams.',
-      scholarsNote: 'Each language forms a distinct linguistic conduit. Mastered through production implementations and formal computer science foundations.',
+      scholarsNote: 'Each language forms a distinct linguistic conduit. Mastered through production implementations and formal CS foundations.',
       Sigil: SigilLanguages,
       skills: [
         { num: '01', name: 'PHP', rank: 'MASTER CRAFT', desc: 'Core PHP & Object-Oriented backend architectures with strict typing.' },
@@ -91,7 +91,7 @@ export default function Grimoire({ isDark }) {
       pageLeft: '3', pageRight: '4', chapter: 'FOLIO II', latinTitle: 'De Machinis Telariis',
       category: 'WEB ENGINES & FRAMEWORKS', subtitle: 'Front-to-Back Orchestration',
       folioLore: 'High-throughput frameworks forging responsive interfaces, deterministic state pipelines, and fortified middleware defenses.',
-      scholarsNote: 'Architecture optimized for latency reduction, zero-runtime overhead where possible, and seamless modular scalability.',
+      scholarsNote: 'Architecture optimized for latency reduction, zero-runtime overhead, and seamless modular scalability.',
       Sigil: SigilWeb,
       skills: [
         { num: '01', name: 'React.js (Vite)', rank: 'PRIMARY ENGINE', desc: 'Component lifecycles, custom hooks, virtual DOM reconciliations.' },
@@ -171,7 +171,7 @@ export default function Grimoire({ isDark }) {
 
   return (
     <div className="w-full pt-4 sm:pt-8 pb-10 sm:pb-16 font-serif">
-      {/* ✦ TITLE BANNER ✦ */}
+      {/* ✦ SECTION BANNER ✦ */}
       <div className="flex flex-col items-center text-center mb-8 sm:mb-14 pb-6 sm:pb-8 border-b border-rose-500/20 px-2">
         <div className="flex items-center gap-2 sm:gap-3 text-[10px] sm:text-xs font-mono tracking-widest sm:tracking-[0.3em] uppercase text-rose-500 mb-2 font-bold">
           <Sparkles className="w-3.5 h-3.5 shrink-0" />
@@ -196,7 +196,7 @@ export default function Grimoire({ isDark }) {
         </div>
       </div>
 
-      {/* ✦ CLOSED BOOK STATE (Responsive widths prevent horizontal scroll) ✦ */}
+      {/* ✦ CLOSED BOOK STATE ✦ */}
       {!isOpen && (
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
@@ -205,7 +205,6 @@ export default function Grimoire({ isDark }) {
           className="flex flex-col items-center justify-center p-2 sm:p-8 text-center"
         >
           <div className="relative group max-w-full">
-            {/* Edge pages preview */}
             <div className={`absolute top-2.5 sm:top-3 right-[-6px] sm:right-[-12px] w-full h-[98%] rounded-r-2xl border-r-4 border-b-4 ${
               isDark ? 'bg-[#26191b] border-[#c49a6c]/60 shadow-[0_0_30px_rgba(0,0,0,0.9)]' : 'bg-[#faf4ec] border-[#b88e60]/70 shadow-lg'
             }`} />
@@ -213,7 +212,6 @@ export default function Grimoire({ isDark }) {
               isDark ? 'bg-[#1a1113] border-[#8a6843]/50' : 'bg-[#f4ebe0] border-[#b88e60]/40'
             }`} />
 
-            {/* Tome Button */}
             <motion.button
               onClick={handleOpenBook}
               onMouseEnter={playHoverSound}
@@ -223,7 +221,6 @@ export default function Grimoire({ isDark }) {
                 isDark ? 'border-[#c49a6c]/80 bg-gradient-to-br from-[#1c0f16] via-[#12080f] to-[#080306] shadow-[0_0_55px_rgba(244,63,94,0.25)]' : 'border-[#b88e60] bg-gradient-to-br from-[#ffffff] via-[#fcfbf9] to-[#f7f3ec] shadow-[0_15px_45px_rgba(184,142,96,0.25)]'
               }`}
             >
-              {/* Tome Spine */}
               <div className={`absolute top-0 bottom-0 left-0 w-8 sm:w-10 border-r-2 flex flex-col justify-around py-8 sm:py-10 items-center z-20 ${
                 isDark ? 'bg-gradient-to-r from-black via-[#1a0c14] to-[#12080f] border-[#c49a6c]/60' : 'bg-gradient-to-r from-[#ebe2d8] via-[#f4eee6] to-[#ebe2d8] border-[#b88e60]'
               }`}>
@@ -232,14 +229,12 @@ export default function Grimoire({ isDark }) {
                 ))}
               </div>
 
-              {/* Lock clasp */}
               <div className={`absolute top-1/2 -right-1 -translate-y-1/2 w-7 sm:w-9 h-16 sm:h-20 rounded-l-md border-2 flex items-center justify-center shadow-xl z-20 ${
                 isDark ? 'border-[#c49a6c] bg-[#24131d] text-[#e0b584]' : 'border-[#b88e60] bg-[#fbf5ee] text-[#8a5d30]'
               }`}>
                 <Lock className="w-3.5 h-3.5 sm:w-4 sm:h-4 drop-shadow-sm" />
               </div>
 
-              {/* Cover Contents */}
               <div className="ml-8 sm:ml-10 h-full flex flex-col justify-between items-center text-center py-6 sm:py-7 px-3 sm:px-5 relative z-10">
                 <div className={`absolute inset-2 sm:inset-3 border rounded-xl pointer-events-none ${isDark ? 'border-[#c49a6c]/35' : 'border-[#b88e60]/35'}`} />
                 <div className={`absolute inset-3.5 sm:inset-5 border border-dashed rounded-lg pointer-events-none ${isDark ? 'border-[#c49a6c]/20' : 'border-[#b88e60]/20'}`} />
@@ -302,22 +297,22 @@ export default function Grimoire({ isDark }) {
             isDark ? 'border-[#c49a6c]/70 bg-gradient-to-b from-[#140a12] via-[#0e060c] to-[#070306] text-rose-50 shadow-[0_0_70px_rgba(244,63,94,0.22)]' : 'border-[#b88e60] bg-[#faf6f0] text-stone-950 shadow-2xl'
           }`}
         >
-          {/* Header Bar */}
-          <div className="flex items-center justify-between border-b px-4 sm:px-10 py-3 sm:py-3.5 border-rose-500/20 font-mono text-xs tracking-widest uppercase">
-            <div className="flex items-center gap-1.5 sm:gap-2 text-rose-500 font-bold truncate pr-2">
-              <Bookmark className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-current shrink-0" />
-              <span className="truncate">CHRONICLES // {page.chapter}</span>
+          {/* Header */}
+          <div className="flex items-center justify-between border-b px-4 sm:px-10 py-3.5 border-rose-500/20 font-mono text-xs tracking-widest uppercase">
+            <div className="flex items-center gap-2 text-rose-500 font-bold truncate pr-2">
+              <Bookmark className="w-4 h-4 fill-current shrink-0" />
+              <span className="truncate">CHRONICLES OF MAISARAH // {page.chapter}</span>
             </div>
 
             <button
               onClick={handleCloseBook}
               onMouseEnter={playHoverSound}
-              className={`shrink-0 flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-lg border text-[11px] sm:text-xs font-mono transition-all active:scale-95 ${
+              className={`shrink-0 flex items-center gap-2 px-3 py-1 rounded-lg border text-xs font-mono transition-all active:scale-95 ${
                 isDark ? 'border-rose-900/60 bg-rose-950/40 text-rose-300 hover:border-rose-400 hover:text-white' : 'border-stone-300 bg-white text-stone-800 hover:border-rose-600 hover:text-black shadow-xs'
               }`}
             >
               <span>SEAL CODEX</span>
-              <X className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-rose-500 transition-transform group-hover:rotate-90 shrink-0" />
+              <X className="w-4 h-4 text-rose-500 transition-transform group-hover:rotate-90" />
             </button>
           </div>
 
@@ -328,62 +323,83 @@ export default function Grimoire({ isDark }) {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.25, ease: 'easeInOut' }}
-              className="relative min-h-[500px] flex flex-col justify-between"
+              className="relative min-h-[520px] flex flex-col justify-between"
             >
-              {/* Central Spine Shadow (Desktop only) */}
               <div className={`hidden lg:block absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-8 sm:w-10 pointer-events-none z-20 ${
                 isDark ? 'bg-gradient-to-r from-transparent via-black/45 to-transparent' : 'bg-gradient-to-r from-transparent via-stone-900/[0.07] to-transparent'
               }`} />
 
               <div className="grid grid-cols-1 lg:grid-cols-2 relative z-10">
-                
-                {/* VERSO (Left Folio Page) */}
-                <div className="p-4 sm:p-7 lg:p-10 lg:pr-14 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-rose-500/15 relative">
+                {/* VERSO (Left Folio) */}
+                <div className="p-5 sm:p-10 lg:pr-14 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-rose-500/15 relative">
                   <div>
-                    <div className="flex items-center justify-between text-[10px] sm:text-[11px] font-mono tracking-widest text-rose-500/80 pb-2.5 border-b border-rose-500/15 uppercase mb-4 sm:mb-6">
+                    <div className="flex items-center justify-between text-[11px] font-mono tracking-widest text-rose-500/80 pb-3 border-b border-rose-500/15 uppercase mb-6">
                       <span>LIBER TECHNOMANCER</span>
                       <span>VERSO</span>
                     </div>
 
-                    <h3 className={`text-lg sm:text-2xl lg:text-3xl font-normal tracking-[0.12em] sm:tracking-[0.16em] uppercase leading-snug ${isDark ? 'text-white' : 'text-stone-900 font-bold'}`}>
+                    <h3 className={`text-xl sm:text-2xl lg:text-3xl font-normal tracking-[0.16em] uppercase leading-tight ${isDark ? 'text-white' : 'text-stone-900 font-bold'}`}>
                       {page.category}
                     </h3>
                     
-                    <p className="text-[11px] sm:text-xs font-mono text-rose-500 tracking-wider sm:tracking-[0.2em] uppercase mt-1 sm:mt-1.5 font-semibold">
+                    <p className="text-xs font-mono text-rose-500 tracking-[0.2em] uppercase mt-1.5 font-semibold">
                       {page.subtitle}
                     </p>
 
-                    <div className="w-12 sm:w-16 h-[1.5px] bg-rose-500/40 my-3.5 sm:my-5" />
+                    <div className="w-16 h-[1.5px] bg-rose-500/40 my-4" />
 
                     <p className={`text-xs sm:text-sm leading-relaxed italic ${isDark ? 'text-rose-100/80' : 'text-stone-700'}`}>
                       "{page.folioLore}"
                     </p>
 
-                    <div className="my-5 sm:my-7 flex justify-center">
+                    {/* ✦ ENLARGED, GLOWING & SLOWLY BLINKING MAGIC SIGIL ✦ */}
+                    <motion.div
+                      animate={{
+                        opacity: [0.72, 0.98, 0.72],
+                        scale: [0.98, 1.02, 0.98],
+                        filter: isDark
+                          ? [
+                              'drop-shadow(0 0 10px rgba(244,63,94,0.35))',
+                              'drop-shadow(0 0 22px rgba(244,63,94,0.65))',
+                              'drop-shadow(0 0 10px rgba(244,63,94,0.35))',
+                            ]
+                          : [
+                              'drop-shadow(0 0 8px rgba(190,18,60,0.2))',
+                              'drop-shadow(0 0 16px rgba(190,18,60,0.45))',
+                              'drop-shadow(0 0 8px rgba(190,18,60,0.2))',
+                            ],
+                      }}
+                      transition={{
+                        duration: 5,
+                        repeat: Infinity,
+                        ease: 'easeInOut',
+                      }}
+                      className="my-5 sm:my-7 flex justify-center items-center w-36 h-36 sm:w-44 sm:h-44 mx-auto"
+                    >
                       <SigilComponent isDark={isDark} />
-                    </div>
+                    </motion.div>
                   </div>
 
                   <div className="pt-2">
-                    <div className={`p-3 sm:p-4 rounded-lg border font-mono text-xs relative mb-4 sm:mb-6 ${
+                    <div className={`p-4 rounded-lg border font-mono text-xs relative mb-6 ${
                       isDark ? 'border-rose-950/70 bg-rose-950/20 text-rose-200/90' : 'border-[#b88e60]/30 bg-rose-50/60 text-stone-800'
                     }`}>
                       <span className="text-[10px] tracking-widest text-rose-500 font-bold block mb-1">// TECHNOMANCER'S MARGINALIA:</span>
-                      <span className="text-[11px] sm:text-xs italic leading-relaxed">{page.scholarsNote}</span>
+                      <span className="italic leading-relaxed">{page.scholarsNote}</span>
                     </div>
 
-                    <div className="flex items-center justify-center pt-1 font-mono text-xs text-rose-500/80">
+                    <div className="flex items-center justify-center pt-2 font-mono text-xs text-rose-500/80">
                       <span className="tracking-widest font-semibold">— {page.pageLeft} —</span>
                     </div>
                   </div>
 
-                  {/* Desktop-only Prev Dog-Ear */}
+                  {/* ✦ PREV DOG-EAR (Bottom-Left) ✦ */}
                   {currentPage > 0 && (
                     <motion.button
                       onClick={handlePrevPage}
                       onMouseEnter={() => { setHoveredDogEar('prev'); playHoverSound(); }}
                       onMouseLeave={() => setHoveredDogEar(null)}
-                      className="hidden lg:flex absolute bottom-0 left-0 w-16 h-16 z-30 group items-end justify-start focus:outline-none"
+                      className="hidden lg:flex absolute bottom-0 left-0 w-16 h-16 z-30 group items-end justify-start focus:outline-none cursor-pointer"
                       aria-label="Turn to Previous Folio"
                     >
                       <AnimatePresence>
@@ -401,68 +417,82 @@ export default function Grimoire({ isDark }) {
                         )}
                       </AnimatePresence>
 
-                      <svg className="w-12 h-12 transition-transform duration-300 group-hover:scale-115" viewBox="0 0 48 48">
-                        <path d="M48 48 L0 0 L48 0 Z" fill="rgba(0,0,0,0.2)" />
-                        <path
-                          d="M48 48 L0 0 L0 48 Z"
-                          fill={isDark ? '#26191b' : '#ede2d3'}
-                          stroke={isDark ? '#c49a6c' : '#b88e60'}
-                          strokeWidth="1.2"
+                      <svg className="w-14 h-14 transition-transform duration-200 group-hover:scale-110 drop-shadow-md" viewBox="0 0 48 48">
+                        {/* Folded corner cutout shadow */}
+                        <path d="M0 0 L48 48 L0 48 Z" fill={isDark ? 'rgba(0,0,0,0.5)' : 'rgba(0,0,0,0.12)'} />
+                        
+                        {/* Highlighted folded page triangle flap */}
+                        <polygon
+                          points="0,0 48,48 48,0"
+                          fill={isDark ? '#2a1622' : '#f5ebe0'}
+                          stroke={isDark ? '#e0a96d' : '#8a5d30'}
+                          strokeWidth="1.5"
+                          strokeLinejoin="round"
                         />
-                        <line x1="48" y1="48" x2="0" y2="0" stroke={isDark ? '#f43f5e' : '#be123c'} strokeWidth="1" strokeDasharray="2 2" />
+
+                        {/* Diagonal crease stitch highlight */}
+                        <line
+                          x1="0"
+                          y1="0"
+                          x2="48"
+                          y2="48"
+                          stroke={isDark ? '#f43f5e' : '#be123c'}
+                          strokeWidth="1.5"
+                          strokeDasharray="3 2"
+                        />
                       </svg>
                     </motion.button>
                   )}
                 </div>
 
-                {/* RECTO (Right Folio Page) */}
-                <div className="p-4 sm:p-7 lg:p-10 lg:pl-14 flex flex-col justify-between relative">
+                {/* RECTO (Right Folio) */}
+                <div className="p-5 sm:p-10 lg:pl-14 flex flex-col justify-between relative">
                   <div>
-                    <div className="flex items-center justify-between text-[10px] sm:text-[11px] font-mono tracking-widest text-rose-500/80 pb-2.5 border-b border-rose-500/15 uppercase mb-4 sm:mb-6">
+                    <div className="flex items-center justify-between text-[11px] font-mono tracking-widest text-rose-500/80 pb-3 border-b border-rose-500/15 uppercase mb-6">
                       <span>{page.latinTitle}</span>
                       <span>RECTO</span>
                     </div>
 
-                    <div className="flex items-center justify-between text-[10px] sm:text-[11px] font-mono tracking-widest text-rose-500/70 pb-2 mb-3 sm:mb-4 uppercase">
+                    <div className="flex items-center justify-between text-[11px] font-mono tracking-widest text-rose-500/70 pb-2 mb-4 uppercase">
                       <span>INCANTATION</span>
                       <span>PROFICIENCY</span>
                     </div>
 
-                    <div className="space-y-3.5 sm:space-y-4">
+                    <div className="space-y-4">
                       {page.skills.map((skill) => (
                         <div
                           key={skill.name}
                           onMouseEnter={playHoverSound}
-                          className="group relative pb-2 sm:pb-2.5 border-b border-rose-500/10 transition-colors"
+                          className="group relative pb-2.5 border-b border-rose-500/10 transition-colors"
                         >
-                          <div className="flex flex-col xs:flex-row xs:items-baseline xs:justify-between gap-1 xs:gap-2 mb-1">
-                            <div className="flex items-baseline gap-2">
+                          <div className="flex items-baseline justify-between gap-3 mb-1">
+                            <div className="flex items-baseline gap-2.5">
                               <span className="font-mono text-xs font-bold text-rose-500 shrink-0 whitespace-nowrap select-none">{skill.num}.</span>
                               <span className={`text-sm sm:text-base font-bold tracking-wide group-hover:text-rose-500 transition-colors ${isDark ? 'text-white' : 'text-stone-900'}`}>{skill.name}</span>
                             </div>
 
                             <div className="hidden sm:block flex-1 border-b border-dotted border-rose-500/30 mx-2" />
 
-                            <span className={`text-[10px] sm:text-[11px] font-mono tracking-wider uppercase font-bold shrink-0 self-start xs:self-auto ${isDark ? 'text-rose-400' : 'text-rose-700'}`}>[{skill.rank}]</span>
+                            <span className={`text-[11px] font-mono tracking-wider uppercase font-bold shrink-0 whitespace-nowrap ${isDark ? 'text-rose-400' : 'text-rose-700'}`}>[{skill.rank}]</span>
                           </div>
 
-                          <p className={`text-[11px] sm:text-xs pl-5 sm:pl-7 leading-relaxed ${isDark ? 'text-rose-100/70' : 'text-stone-600'}`}>{skill.desc}</p>
+                          <p className={`text-xs pl-7 leading-relaxed ${isDark ? 'text-rose-100/70' : 'text-stone-600'}`}>{skill.desc}</p>
                         </div>
                       ))}
                     </div>
                   </div>
 
-                  <div className="pt-4 font-mono text-xs text-rose-500/80 flex items-center justify-center">
+                  <div className="pt-2 font-mono text-xs text-rose-500/80 flex items-center justify-center">
                     <span className="tracking-widest font-semibold">— {page.pageRight} —</span>
                   </div>
 
-                  {/* Desktop-only Next Dog-Ear */}
+                  {/* ✦ NEXT DOG-EAR (Bottom-Right) ✦ */}
                   {currentPage < folios.length - 1 && (
                     <motion.button
                       onClick={handleNextPage}
                       onMouseEnter={() => { setHoveredDogEar('next'); playHoverSound(); }}
                       onMouseLeave={() => setHoveredDogEar(null)}
-                      className="hidden lg:flex absolute bottom-0 right-0 w-16 h-16 z-30 group items-end justify-end focus:outline-none"
+                      className="hidden lg:flex absolute bottom-0 right-0 w-16 h-16 z-30 group items-end justify-end focus:outline-none cursor-pointer"
                       aria-label="Turn to Next Folio"
                     >
                       <AnimatePresence>
@@ -471,7 +501,7 @@ export default function Grimoire({ isDark }) {
                             initial={{ opacity: 0, y: 5 }}
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: 5 }}
-                            className={`absolute bottom-12 right-4 px-3 py-1 rounded font-mono text-[10px] tracking-widest uppercase border whitespace-nowrap shadow-xl pointer-events-none ${
+                            className={`absolute bottom-full mb-2 right-2 px-3 py-1 rounded font-mono text-[10px] tracking-widest uppercase border whitespace-nowrap shadow-xl pointer-events-none z-50 ${
                               isDark ? 'bg-black/95 border-rose-500 text-rose-200' : 'bg-white border-[#b88e60] text-stone-900'
                             }`}
                           >
@@ -480,15 +510,29 @@ export default function Grimoire({ isDark }) {
                         )}
                       </AnimatePresence>
 
-                      <svg className="w-12 h-12 transition-transform duration-300 group-hover:scale-115" viewBox="0 0 48 48">
-                        <path d="M0 48 L48 0 L0 0 Z" fill="rgba(0,0,0,0.2)" />
-                        <path
-                          d="M0 48 L48 0 L48 48 Z"
-                          fill={isDark ? '#26191b' : '#ede2d3'}
-                          stroke={isDark ? '#c49a6c' : '#b88e60'}
-                          strokeWidth="1.2"
+                      <svg className="w-14 h-14 transition-transform duration-200 group-hover:scale-110 drop-shadow-md" viewBox="0 0 48 48">
+                        {/* Folded corner cutout shadow */}
+                        <path d="M0 48 L48 0 L48 48 Z" fill={isDark ? 'rgba(0,0,0,0.5)' : 'rgba(0,0,0,0.12)'} />
+                        
+                        {/* Highlighted folded page triangle flap */}
+                        <polygon
+                          points="0,48 48,0 0,0"
+                          fill={isDark ? '#2a1622' : '#f5ebe0'}
+                          stroke={isDark ? '#e0a96d' : '#8a5d30'}
+                          strokeWidth="1.5"
+                          strokeLinejoin="round"
                         />
-                        <line x1="0" y1="48" x2="48" y2="0" stroke={isDark ? '#f43f5e' : '#be123c'} strokeWidth="1" strokeDasharray="2 2" />
+
+                        {/* Diagonal crease stitch highlight */}
+                        <line
+                          x1="0"
+                          y1="48"
+                          x2="48"
+                          y2="0"
+                          stroke={isDark ? '#f43f5e' : '#be123c'}
+                          strokeWidth="1.5"
+                          strokeDasharray="3 2"
+                        />
                       </svg>
                     </motion.button>
                   )}
@@ -496,7 +540,7 @@ export default function Grimoire({ isDark }) {
 
               </div>
 
-              {/* ✦ MOBILE FOLIO PAGINATION CONTROLS (Solves vertical stacking navigation) ✦ */}
+              {/* ✦ MOBILE COMPACT PAGINATION BAR ✦ */}
               <div className="lg:hidden flex items-center justify-between p-3 border-t border-rose-500/20 bg-black/15 font-mono text-xs">
                 <button
                   onClick={handlePrevPage}

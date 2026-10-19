@@ -17,7 +17,6 @@ import {
   playClickSound, 
   playHoverSound, 
   startAmbientSong, 
-  stopAmbientSong,
   initAutostartOnFirstInteraction 
 } from './utils/sound';
 
@@ -45,18 +44,17 @@ export default function App() {
     setTheme(isDark ? 'light' : 'dark');
   };
 
+  // ✦ CONTINUOUS BGM: Music stays playing when returning to Title Screen ✦
   const handleReturnToTitle = () => {
     playClickSound();
-    stopAmbientSong();
     setActiveSubPage(null);
     setGameState('start-screen');
   };
 
+  // ✦ INSTANT AUTOPLAY: Triggers immediately when loader finishes ✦
   const handleLoadingComplete = () => {
     setGameState('start-screen');
-    setTimeout(() => {
-      startAmbientSong();
-    }, 1000);
+    startAmbientSong();
   };
 
   const handleSelectMenuOption = (sectionId) => {
