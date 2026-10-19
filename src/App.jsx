@@ -47,24 +47,20 @@ export default function App() {
 
   const handleReturnToTitle = () => {
     playClickSound();
-    stopAmbientSong(); // Stops BGM when going back to title screen
+    stopAmbientSong();
     setActiveSubPage(null);
     setGameState('start-screen');
   };
 
-  // ✦ ATTEMPT AUTO-START WHEN TITLE SCREEN APPEARS ✦
   const handleLoadingComplete = () => {
     setGameState('start-screen');
     setTimeout(() => {
-      // If browser allows it, it plays. If browser blocks it,
-      // initAutostartOnFirstInteraction will catch the first click!
       startAmbientSong();
     }, 1000);
   };
 
   const handleSelectMenuOption = (sectionId) => {
     playClickSound();
-    // Ensure BGM plays when user enters game from start screen
     startAmbientSong();
 
     if (sectionId === 'lore') {
@@ -97,46 +93,51 @@ export default function App() {
       {/* 2. Layered Floating Magical Embers */}
       <FloatingEmbers isDark={isDark} />
 
-      {/* 3. Fixed Top-Left Return Button */}
+      {/* 3. Fixed Top-Left Return Button (Responsive sizing & padding) */}
       {gameState === 'in-game' && (
-        <div className="fixed top-6 left-6 z-50">
+        <div className="fixed top-3 left-3 sm:top-6 sm:left-6 z-50">
           <button
             onClick={activeSubPage ? () => setActiveSubPage(null) : handleReturnToTitle}
             onMouseEnter={playHoverSound}
             aria-label="Return"
-            className={`cursor-none group flex items-center gap-2 px-4 py-1.5 rounded-full border text-xs font-mono transition-all backdrop-blur-md shadow-md ${
+            className={`group flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-4 py-1.5 rounded-full border text-xs font-mono transition-all backdrop-blur-md shadow-md ${
               isDark
-                ? 'border-rose-500/30 bg-rose-950/70 text-rose-200 hover:border-rose-400 hover:text-white shadow-[0_0_15px_rgba(244,63,94,0.25)]'
+                ? 'border-rose-500/30 bg-rose-950/80 text-rose-200 hover:border-rose-400 hover:text-white shadow-[0_0_15px_rgba(244,63,94,0.25)]'
                 : 'border-stone-300 bg-white/95 text-stone-900 hover:border-rose-600 hover:text-black shadow-sm'
             }`}
           >
-            <Undo2 className="w-3.5 h-3.5 text-rose-500 transition-transform group-hover:-translate-x-1" />
-            <span>{activeSubPage ? 'RETURN TO REALM' : 'RETURN TO TITLE'}</span>
+            <Undo2 className="w-3.5 h-3.5 text-rose-500 transition-transform group-hover:-translate-x-1 shrink-0" />
+            <span className="hidden sm:inline">
+              {activeSubPage ? 'RETURN TO REALM' : 'RETURN TO TITLE'}
+            </span>
+            <span className="inline sm:hidden">
+              {activeSubPage ? 'BACK' : 'TITLE'}
+            </span>
           </button>
         </div>
       )}
 
-      {/* 4. Top-Right Global Controls */}
-      <div className="fixed top-6 right-6 z-50 flex items-center gap-2.5">
+      {/* 4. Top-Right Global Controls (Icon-only on mobile to prevent overflow) */}
+      <div className="fixed top-3 right-3 sm:top-6 sm:right-6 z-50 flex items-center gap-1.5 sm:gap-2.5">
         <button
           onClick={handleThemeToggle}
           onMouseEnter={playHoverSound}
           aria-label="Toggle Theme"
-          className={`cursor-none flex items-center gap-2 px-3.5 py-1.5 rounded-full border text-xs font-mono transition-all backdrop-blur-md shadow-sm ${
+          className={`flex items-center gap-1.5 px-2.5 sm:px-3.5 py-1.5 rounded-full border text-xs font-mono transition-all backdrop-blur-md shadow-sm ${
             isDark
-              ? 'border-rose-500/30 bg-rose-950/60 text-rose-200 hover:border-rose-400 hover:text-white'
-              : 'border-stone-300 bg-white/90 text-stone-900 hover:border-rose-500 hover:text-black shadow-xs'
+              ? 'border-rose-500/30 bg-rose-950/80 text-rose-200 hover:border-rose-400 hover:text-white'
+              : 'border-stone-300 bg-white/95 text-stone-900 hover:border-rose-500 hover:text-black shadow-xs'
           }`}
         >
           {isDark ? (
             <>
-              <Sun className="w-3.5 h-3.5 text-amber-300" />
-              <span>LIGHT MODE</span>
+              <Sun className="w-3.5 h-3.5 text-amber-300 shrink-0" />
+              <span className="hidden md:inline">LIGHT MODE</span>
             </>
           ) : (
             <>
-              <Moon className="w-3.5 h-3.5 text-rose-700" />
-              <span>DARK MODE</span>
+              <Moon className="w-3.5 h-3.5 text-rose-700 shrink-0" />
+              <span className="hidden md:inline">DARK MODE</span>
             </>
           )}
         </button>
@@ -145,14 +146,18 @@ export default function App() {
           onClick={handleMuteToggle}
           onMouseEnter={playHoverSound}
           aria-label="Toggle Audio"
-          className={`cursor-none flex items-center gap-2 px-3.5 py-1.5 rounded-full border text-xs font-mono transition-all backdrop-blur-md shadow-sm ${
+          className={`flex items-center gap-1.5 px-2.5 sm:px-3.5 py-1.5 rounded-full border text-xs font-mono transition-all backdrop-blur-md shadow-sm ${
             isDark
-              ? 'border-rose-500/30 bg-rose-950/60 text-rose-200 hover:border-rose-400'
-              : 'border-stone-300 bg-white/90 text-stone-900 hover:border-rose-500 shadow-xs'
+              ? 'border-rose-500/30 bg-rose-950/80 text-rose-200 hover:border-rose-400'
+              : 'border-stone-300 bg-white/95 text-stone-900 hover:border-rose-500 shadow-xs'
           }`}
         >
-          {muted ? <VolumeX className="w-3.5 h-3.5 text-rose-400" /> : <Volume2 className="w-3.5 h-3.5 text-rose-500" />}
-          <span className="hidden sm:inline">{muted ? 'MUTE' : 'SOUND'}</span>
+          {muted ? (
+            <VolumeX className="w-3.5 h-3.5 text-rose-400 shrink-0" />
+          ) : (
+            <Volume2 className="w-3.5 h-3.5 text-rose-500 shrink-0" />
+          )}
+          <span className="hidden md:inline">{muted ? 'MUTE' : 'SOUND'}</span>
         </button>
       </div>
 
@@ -171,9 +176,9 @@ export default function App() {
         )}
       </AnimatePresence>
 
-      {/* 6. The In-Game World inside the Master Parchment Scroll (Enlarged to max-w-7xl) */}
+      {/* 6. In-Game World */}
       {gameState === 'in-game' && (
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-8 pt-16 pb-12">
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-2 sm:px-6 md:px-8 pt-16 sm:pt-20 pb-12">
           <AnimatePresence mode="wait">
             {activeSubPage === 'lore' && (
               <DesignLorePage key="lore" isDark={isDark} onBack={() => setActiveSubPage(null)} />

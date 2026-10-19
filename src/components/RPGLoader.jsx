@@ -60,7 +60,7 @@ export default function RPGLoader({ onComplete, isDark }) {
       }`}>
         <div className="flex items-center gap-2.5">
           <Sparkle className={`w-3.5 h-3.5 ${isDark ? 'text-rose-500 animate-pulse' : 'text-rose-700'}`} />
-          <span>CHRONICLES // INITIALIZING</span>
+          <span>CHRONICLES OF MAISARAH // INITIALIZING</span>
         </div>
         <span>KOTA KINABALU // 2026</span>
       </div>
