@@ -104,7 +104,7 @@ export default function RPGStartScreen({ onSelectOption, isDark }) {
         <p className={`mt-2.5 sm:mt-3 text-[11px] sm:text-sm font-mono tracking-[0.16em] sm:tracking-[0.28em] uppercase font-medium px-2 ${
           isDark ? 'text-rose-300 drop-shadow-[0_0_10px_rgba(244,63,94,0.4)]' : 'text-rose-800'
         }`}>
-          FULL-STACK DEVELOPER & AI ENGINEER
+          FULL-STACK SOFTWARE ENGINEER // APPLIED AI
         </p>
 
         <p className={`mt-1 text-[9px] sm:text-xs font-mono tracking-[0.1em] sm:tracking-[0.18em] uppercase font-medium max-w-lg px-3 ${

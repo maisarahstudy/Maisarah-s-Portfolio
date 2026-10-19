@@ -6,9 +6,9 @@ import Grimoire from './Grimoire';
 
 export default function CharacterSheet({ isDark }) {
   const stats = [
-    { name: 'Spatio-Temporal AI & ML (XGBoost)', value: 92, max: 100 },
+    { name: 'Full-Stack Engineering (React, FastAPI, Laravel)', value: 94, max: 100 },
     { name: 'Netcentric Arch & Web Security (CSRF, SQLi)', value: 95, max: 100 },
-    { name: 'Full-Stack Engineering (React, FastAPI, Laravel)', value: 90, max: 100 },
+    { name: 'Applied AI & Predictive ML (FastAPI, XGBoost)', value: 90, max: 100 },
     { name: 'Relational & Scalable DBs (Postgres, MySQL)', value: 88, max: 100 },
   ];
 
@@ -130,12 +130,14 @@ export default function CharacterSheet({ isDark }) {
             <p className={`text-xs sm:text-sm font-mono font-semibold mt-1 ${isDark ? 'text-rose-200' : 'text-rose-800'}`}>
               Binti Salto @ Suharto
             </p>
-            <span className={`mt-3 px-3 py-1 sm:px-4 sm:py-1.5 rounded-full text-[11px] sm:text-xs font-mono border font-semibold ${
+            
+            {/* Optimized High-Hireability Title Badge */}
+            <span className={`mt-3 px-3.5 py-1.5 rounded-full text-[11px] sm:text-xs font-mono border font-semibold ${
               isDark
                 ? 'border-rose-500/40 bg-rose-900/40 text-rose-200 shadow-sm'
                 : 'border-rose-300 bg-rose-50 text-rose-950 shadow-xs'
             }`}>
-              Full-Stack Developer & AI Engineer
+              Full-Stack Software Engineer · Applied AI
             </span>
           </div>
 
@@ -204,7 +206,7 @@ export default function CharacterSheet({ isDark }) {
                 I am a Computer Science graduate specializing in Netcentric Computing from Universiti Teknologi MARA (UiTM), complemented by intensive full-stack AI engineering training as a Gamuda AI Academy alumnus. 
               </p>
               <p>
-                With hands-on public sector experience developing secure, data-driven web applications using core PHP, Laravel, and MySQL in Kota Kinabalu, I bridge the gap between robust database architecture and intelligent machine learning systems.
+                With hands-on public sector experience developing secure, data-driven web applications using core PHP, Laravel, and MySQL in Kota Kinabalu, I bridge the gap between robust database architecture, network security, and practical machine learning integrations.
               </p>
             </div>
           </div>
