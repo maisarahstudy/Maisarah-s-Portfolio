@@ -11,7 +11,7 @@ import Projects from './components/Projects';
 import DesignLorePage from './components/DesignLorePage';
 import JtdinNdaPage from './components/JtdinNdaPage';
 import Contact from './components/Contact';
-import { Volume2, VolumeX, Undo2, Sun, Moon } from 'lucide-react';
+import { Volume2, VolumeX, Undo2, Sun, Moon, FileText } from 'lucide-react';
 import { 
   toggleMute, 
   playClickSound, 
@@ -93,14 +93,14 @@ export default function App() {
       {/* 2. Layered Floating Magical Embers */}
       <FloatingEmbers isDark={isDark} />
 
-      {/* 3. Fixed Top-Left Return Button (Responsive sizing & padding) */}
+      {/* 3. Fixed Top-Left Return Button */}
       {gameState === 'in-game' && (
         <div className="fixed top-3 left-3 sm:top-6 sm:left-6 z-50">
           <button
             onClick={activeSubPage ? () => setActiveSubPage(null) : handleReturnToTitle}
             onMouseEnter={playHoverSound}
             aria-label="Return"
-            className={`group flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-4 py-1.5 rounded-full border text-xs font-mono transition-all backdrop-blur-md shadow-md ${
+            className={`group flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-4 py-1.5 rounded-full border text-xs font-mono transition-all backdrop-blur-md shadow-md active:scale-95 ${
               isDark
                 ? 'border-rose-500/30 bg-rose-950/80 text-rose-200 hover:border-rose-400 hover:text-white shadow-[0_0_15px_rgba(244,63,94,0.25)]'
                 : 'border-stone-300 bg-white/95 text-stone-900 hover:border-rose-600 hover:text-black shadow-sm'
@@ -117,13 +117,34 @@ export default function App() {
         </div>
       )}
 
-      {/* 4. Top-Right Global Controls (Icon-only on mobile to prevent overflow) */}
+      {/* 4. Top-Right Global Controls (Resume + Theme + Audio) */}
       <div className="fixed top-3 right-3 sm:top-6 sm:right-6 z-50 flex items-center gap-1.5 sm:gap-2.5">
+        
+        {/* ✦ 1-CLICK RESUME DOWNLOAD ✦ */}
+        <a
+          href="/(BI)%20Resume%20Nur%20Fatihah%20Maisarah%20(2026).pdf"
+          download="(BI) Resume Nur Fatihah Maisarah (2026).pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+          onMouseEnter={playHoverSound}
+          onClick={playClickSound}
+          aria-label="Download Resume"
+          className={`flex items-center gap-1.5 px-2.5 sm:px-3.5 py-1.5 rounded-full border text-xs font-mono transition-all backdrop-blur-md shadow-sm active:scale-95 ${
+            isDark
+              ? 'border-rose-500/30 bg-rose-950/80 text-rose-200 hover:border-rose-400 hover:text-white'
+              : 'border-stone-300 bg-white/95 text-stone-900 hover:border-rose-500 hover:text-black shadow-xs'
+          }`}
+        >
+          <FileText className="w-3.5 h-3.5 text-rose-500 shrink-0" />
+          <span className="hidden md:inline">RESUME</span>
+        </a>
+
+        {/* Theme Toggle */}
         <button
           onClick={handleThemeToggle}
           onMouseEnter={playHoverSound}
           aria-label="Toggle Theme"
-          className={`flex items-center gap-1.5 px-2.5 sm:px-3.5 py-1.5 rounded-full border text-xs font-mono transition-all backdrop-blur-md shadow-sm ${
+          className={`flex items-center gap-1.5 px-2.5 sm:px-3.5 py-1.5 rounded-full border text-xs font-mono transition-all backdrop-blur-md shadow-sm active:scale-95 ${
             isDark
               ? 'border-rose-500/30 bg-rose-950/80 text-rose-200 hover:border-rose-400 hover:text-white'
               : 'border-stone-300 bg-white/95 text-stone-900 hover:border-rose-500 hover:text-black shadow-xs'
@@ -142,11 +163,12 @@ export default function App() {
           )}
         </button>
 
+        {/* Audio Toggle */}
         <button
           onClick={handleMuteToggle}
           onMouseEnter={playHoverSound}
           aria-label="Toggle Audio"
-          className={`flex items-center gap-1.5 px-2.5 sm:px-3.5 py-1.5 rounded-full border text-xs font-mono transition-all backdrop-blur-md shadow-sm ${
+          className={`flex items-center gap-1.5 px-2.5 sm:px-3.5 py-1.5 rounded-full border text-xs font-mono transition-all backdrop-blur-md shadow-sm active:scale-95 ${
             isDark
               ? 'border-rose-500/30 bg-rose-950/80 text-rose-200 hover:border-rose-400'
               : 'border-stone-300 bg-white/95 text-stone-900 hover:border-rose-500 shadow-xs'
@@ -176,7 +198,7 @@ export default function App() {
         )}
       </AnimatePresence>
 
-      {/* 6. In-Game World */}
+      {/* 6. The In-Game World */}
       {gameState === 'in-game' && (
         <div className="relative z-10 w-full max-w-7xl mx-auto px-2 sm:px-6 md:px-8 pt-16 sm:pt-20 pb-12">
           <AnimatePresence mode="wait">

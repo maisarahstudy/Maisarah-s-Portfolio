@@ -1,14 +1,25 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Shield, Sparkles, Award, Code2, Heart, Zap, Briefcase, GraduationCap, User } from 'lucide-react';
-import { playHoverSound } from '../utils/sound';
+import { 
+  Shield, 
+  Sparkles, 
+  Award, 
+  Code2, 
+  Heart, 
+  Zap, 
+  Briefcase, 
+  GraduationCap, 
+  User, 
+  FileText 
+} from 'lucide-react';
+import { playHoverSound, playClickSound } from '../utils/sound';
 import Grimoire from './Grimoire';
 
 export default function CharacterSheet({ isDark }) {
   const stats = [
-    { name: 'Full-Stack Engineering (React, FastAPI, Laravel)', value: 94, max: 100 },
+    { name: 'Spatio-Temporal AI & ML (XGBoost)', value: 92, max: 100 },
     { name: 'Netcentric Arch & Web Security (CSRF, SQLi)', value: 95, max: 100 },
-    { name: 'Applied AI & Predictive ML (FastAPI, XGBoost)', value: 90, max: 100 },
+    { name: 'Full-Stack Engineering (React, FastAPI, Laravel)', value: 90, max: 100 },
     { name: 'Relational & Scalable DBs (Postgres, MySQL)', value: 88, max: 100 },
   ];
 
@@ -130,15 +141,31 @@ export default function CharacterSheet({ isDark }) {
             <p className={`text-xs sm:text-sm font-mono font-semibold mt-1 ${isDark ? 'text-rose-200' : 'text-rose-800'}`}>
               Binti Salto @ Suharto
             </p>
-            
-            {/* Optimized High-Hireability Title Badge */}
-            <span className={`mt-3 px-3.5 py-1.5 rounded-full text-[11px] sm:text-xs font-mono border font-semibold ${
+            <span className={`mt-3 px-3 py-1 sm:px-4 sm:py-1.5 rounded-full text-[11px] sm:text-xs font-mono border font-semibold ${
               isDark
                 ? 'border-rose-500/40 bg-rose-900/40 text-rose-200 shadow-sm'
                 : 'border-rose-300 bg-rose-50 text-rose-950 shadow-xs'
             }`}>
               Full-Stack Software Engineer · Applied AI
             </span>
+
+            {/* ✦ 1-CLICK RESUME / GUILD DOSSIER DOWNLOAD ✦ */}
+            <a
+              href="/(BI)%20Resume%20Nur%20Fatihah%20Maisarah%20(2026).pdf"
+              download="(BI) Resume Nur Fatihah Maisarah (2026).pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              onMouseEnter={playHoverSound}
+              onClick={playClickSound}
+              className={`mt-4 inline-flex items-center justify-center gap-2 px-4 py-2 rounded-full border text-xs font-mono uppercase tracking-wider font-bold transition-all w-full active:scale-95 ${
+                isDark
+                  ? 'border-[#c49a6c] bg-rose-950/60 text-rose-200 hover:bg-rose-500 hover:text-black shadow-[0_0_15px_rgba(244,63,94,0.3)]'
+                  : 'border-[#b88e60] bg-white text-stone-900 hover:bg-rose-50 hover:border-rose-600 shadow-sm'
+              }`}
+            >
+              <FileText className="w-3.5 h-3.5 text-rose-500 shrink-0" />
+              <span>DOWNLOAD RESUME (PDF)</span>
+            </a>
           </div>
 
           {/* Vitals Bars */}
@@ -206,7 +233,7 @@ export default function CharacterSheet({ isDark }) {
                 I am a Computer Science graduate specializing in Netcentric Computing from Universiti Teknologi MARA (UiTM), complemented by intensive full-stack AI engineering training as a Gamuda AI Academy alumnus. 
               </p>
               <p>
-                With hands-on public sector experience developing secure, data-driven web applications using core PHP, Laravel, and MySQL in Kota Kinabalu, I bridge the gap between robust database architecture, network security, and practical machine learning integrations.
+                With hands-on public sector experience developing secure, data-driven web applications using core PHP, Laravel, and MySQL in Kota Kinabalu, I bridge the gap between robust database architecture and intelligent machine learning systems.
               </p>
             </div>
           </div>
